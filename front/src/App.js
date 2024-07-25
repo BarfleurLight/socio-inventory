@@ -1,10 +1,18 @@
 import './App.css';
 import React, { useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Header, Footer } from './components'
 import styles from './styles.module.css'
 import cn from 'classnames'
 import hamburgerImg from './images/hamburger-menu.png'
 import emblemImg from './images/emblemImg.png'
+
+import {
+  Inventory,
+  // Models,
+  // Consumables,
+  // Map
+} from './pages'
 
 function App() {
   const [ menuToggled, setMenuToggled ] = useState(false)
@@ -35,6 +43,16 @@ function App() {
         <img src={emblemImg} alt=""/>
       </div>
       <Header orders={orders} />
+      <Routes>
+        <Route 
+          path='/inventory'
+          element = { <Inventory updateOrders={updateOrders}/>}
+        />
+        <Route 
+          path='/'
+          element={ <Navigate to='/inventory' /> }
+          />
+      </Routes>
       <Footer />
     </div>
   );

@@ -1,0 +1,45 @@
+.filtersContainer {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+.filterInput {
+    width: 250px;
+    float: left;
+    align-items: center;
+    margin-left: 30px;
+    width: 300px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: #fff;
+}
+
+.searchInput {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+
+.filterSelect {
+    /* width: 75px; */
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* float: right; */
+    /* padding: 8px; */
+}
+
+.room {
+    width: 75px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    float: right;
+}
+

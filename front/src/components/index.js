@@ -3,7 +3,12 @@ import Footer from './footer'
 import LinkComponent from './link'
 import Container from './container'
 import Main from './main'
-// import Card from './card'
+// import Inventory from './inventory'
+// import InventoryList from './inventory-list'
+import InventoryTable from './inventory-teble'
+import Nav from './nav'
+// import InventoryHeader from './inventory-header'
+import Filters from './filters'
 // import CardList from './card-list'
 // import Icons from './icons'
 // import Button from './button'
@@ -12,7 +17,7 @@ import Main from './main'
 // import ProtectedRoute from './protected-route'
 // import Input from './input'
 // import AccountMenu from './account-menu'
-import Nav from './nav'
+
 // import Tag from './tag'
 // import TagsContainer from './tags-container'
 // import Textarea from './textarea'
@@ -32,6 +37,12 @@ export {
   LinkComponent,
   Container,
   Main,
+  // Inventory,
+  // InventoryList,
+  // InventoryHeader,
+  InventoryTable,
+  Nav,
+  Filters,
   // Card,
   // Icons,
   // Button,
@@ -41,7 +52,6 @@ export {
   // ProtectedRoute,
   // Input,
   // AccountMenu,
-  Nav,
   // Tag,
   // TagsContainer,
   // Textarea,
