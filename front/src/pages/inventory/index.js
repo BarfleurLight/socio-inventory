@@ -1,6 +1,6 @@
 import { Container, Main, InventoryTable  } from '../../components'
 import { useInventoryList } from '../../utils/index.js'
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import api from '../../api'
 
 // import classNames from 'classnames'
@@ -14,29 +14,23 @@ const Inventory = () => {
       setInventoryList,
     } = useInventoryList()
 
-  const getInventoryList = () => {
+  const getInventoryList = useCallback(() => {
       api
         .getInventoryList()
         .then(res => {
           const { results } = res
           setInventoryList(results)
-        })
-    }
+        });
+    }, [setInventoryList])
+
   
   useEffect(_ => {
     getInventoryList()
-    }, [])
+    }, [getInventoryList])
 
 
   return <Main>
     <Container>
-      {/* <ControlPanel />
-        <InventoryList>
-          <InventoryHeader />
-          {inventorylist.map(inventory => <Inventory
-            {...inventory}
-          />)}
-        </InventoryList> */}
         <InventoryTable inventorylist={inventorylist} />
     </Container>
   </Main>

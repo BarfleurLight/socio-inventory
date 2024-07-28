@@ -3,12 +3,14 @@ import Footer from './footer'
 import LinkComponent from './link'
 import Container from './container'
 import Main from './main'
+import Model from './model'
 // import Inventory from './inventory'
 // import InventoryList from './inventory-list'
 import InventoryTable from './inventory-teble'
 import Nav from './nav'
 // import InventoryHeader from './inventory-header'
 import Filters from './filters'
+import Img from './image'
 // import CardList from './card-list'
 // import Icons from './icons'
 // import Button from './button'
@@ -37,12 +39,14 @@ export {
   LinkComponent,
   Container,
   Main,
+  Model,
   // Inventory,
   // InventoryList,
   // InventoryHeader,
   InventoryTable,
   Nav,
   Filters,
+  Img,
   // Card,
   // Icons,
   // Button,

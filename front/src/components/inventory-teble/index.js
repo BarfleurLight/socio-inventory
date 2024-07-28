@@ -1,6 +1,6 @@
 import styles from './style.module.css';
 import { useNavigate } from 'react-router-dom';
-import { Filters } from '../index';
+import { Filters, Img } from '../index';
 import React, { useMemo, useState } from 'react';
 import {
   useReactTable,
@@ -36,7 +36,7 @@ const InventoryTable = ({ inventorylist }) => {
       const initials = `${middleName[0]}.${lastName[0]}.`;
       return `${firstName} ${initials}`;
     }
-    return fullName; // на случай, если формат имени не соответствует ожиданиям
+    return fullName;
   };
 
   const columns = useMemo(
@@ -46,9 +46,7 @@ const InventoryTable = ({ inventorylist }) => {
         id: 'image',
         accessorKey: 'image',
         enableSorting: false,
-        cell: ({ row }) => (
-          <img src={row.original.image} alt="Фото" style={{ width: '50px', height: '50px' }} />
-        )
+        cell: ({ row }) => (<Img className={styles.image} src={row.original.image}/>)
       },
       { 
         header: 'Полное название', 

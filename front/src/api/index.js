@@ -9,7 +9,7 @@ class Api {
     const mockResponse = [
         {
             id: 1,
-            image: 'URL_photo1',
+            image: 'https://foodgram.mvobr.ru/backend_media/recipes/images/temp.jpeg',
             fullname: 'МФУ SHARP MX-M266NVEU',
             shortname: 'SHARP 266NV',
             // model object
@@ -62,7 +62,35 @@ class Api {
     return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
   }
 
+  // Models
+  getModels ( ) {
+    const mockResponse = [
+        {
+            id: 1,
+            image: 'https://foodgram.mvobr.ru/backend_media/recipes/images/temp.jpeg',
+            name: 'SHARP 266NV',
+            type: 'printer',
+            all: 5,
+          },{
+            id: 2,
+            image: 'URL_photo2',
+            name: 'MSI Adora 20 2BT',
+            type: 'computer',
+            all: 7,
+          },{
+            id: 3,
+            image: 'URL_photo3',
+            name: 'Lenovo V530',
+            type: 'none',
+            all: 3,
+          }
+    ]
+
+    return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
+  }
 
 }
 
-export default new Api(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' })
+const apiInstance = new Api(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' });
+
+export default apiInstance;

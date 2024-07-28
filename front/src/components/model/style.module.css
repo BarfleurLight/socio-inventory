@@ -1,0 +1,48 @@
+.model {
+  display: flex;
+  flex-direction: column;
+  max-width: 363px;
+  border: 1px solid #EEEEEE;
+  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.model__image {
+    height: 240px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+  }
+
+.model__title {
+  /* font-family: 'Montserrat', sans-serif; */
+  font-style: normal;
+  /* font-weight: bold; */
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+  /* margin: 0 0 12px; */
+  margin: 12px;
+  padding: 0;
+  display: block;
+  text-align: left;
+}
+
+.model__body {
+  /* padding: 24px 24px 12px; */
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  /* flex: 0 0 auto; */
+}
+
+.model__count {
+    display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin-right: 10px;
+}

@@ -68,7 +68,10 @@ tbody tr:hover {
 
 @media screen {
   .image {
-
+    width: 70px;
+    height: 40px;
+    background-position: 50%;
+    background-size: cover;
   }
   .fullname {
     min-width: 100px;;
