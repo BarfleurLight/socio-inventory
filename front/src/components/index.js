@@ -6,11 +6,11 @@ import Main from './main'
 import Model from './model'
 // import Inventory from './inventory'
 // import InventoryList from './inventory-list'
-import InventoryTable from './inventory-teble'
 import Nav from './nav'
 // import InventoryHeader from './inventory-header'
-import Filters from './filters'
+import InventoryFilters from './inventory-filters'
 import Img from './image'
+import Table from './table'
 // import CardList from './card-list'
 // import Icons from './icons'
 // import Button from './button'
@@ -40,12 +40,12 @@ export {
   Container,
   Main,
   Model,
+  Table,
   // Inventory,
   // InventoryList,
   // InventoryHeader,
-  InventoryTable,
   Nav,
-  Filters,
+  InventoryFilters,
   Img,
   // Card,
   // Icons,

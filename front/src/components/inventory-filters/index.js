@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styles from './style.module.css'
 
 
-const Filters = ({
+const InventoryFilters = ({
   globalFilter,
   setGlobalFilter,
   statusFilter,
@@ -12,8 +12,9 @@ const Filters = ({
   roomFilter,
   setRoomFilter,
   uniqueStatuses = [],  // Инициализируем как пустой массив
-  uniqueResponsibles = [] // Инициализируем как пустой массив
+  uniqueResponsibles = [], // Инициализируем как пустой массив
 }) => {
+
   return (
     <div className={styles.filtersContainer}>
       <input
@@ -59,4 +60,4 @@ const Filters = ({
 };
 
 
-export default Filters;
+export default InventoryFilters;

@@ -1,0 +1,32 @@
+.inventory {
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+    
+  
+@media screen {
+  .fullname {
+    min-width: 100px;;
+  }
+
+  .model {
+
+  }
+  .serial_number {
+    max-width: 100px;
+  }
+  .status {
+    word-wrap: break-word;
+  }
+  .status_online {
+
+  }
+  .current_responsible {
+
+  }
+  .room {
+    max-width: 75px;
+  }
+}
+  

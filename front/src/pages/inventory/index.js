@@ -1,18 +1,13 @@
-import { Container, Main, InventoryTable  } from '../../components'
-import { useInventoryList } from '../../utils/index.js'
-import { useEffect, useCallback } from 'react'
+import styles from './style.module.css';
 import api from '../../api'
-
-// import classNames from 'classnames'
-// import styles from './styles.module.css'
+import { Container, Main, Table, InventoryFilters } from '../../components'
+import { useInventoryList, useInventoryFilters } from '../../utils/index.js'
+import useInventoryColumns  from '../../columns/inventory/inventory.js'
+import { useEffect, useCallback, useState } from 'react'
 
 
 const Inventory = () => {
-
-  const {
-      inventorylist,
-      setInventoryList,
-    } = useInventoryList()
+  const {inventorylist, setInventoryList } = useInventoryList()
 
   const getInventoryList = useCallback(() => {
       api
@@ -23,15 +18,29 @@ const Inventory = () => {
         });
     }, [setInventoryList])
 
-  
   useEffect(_ => {
     getInventoryList()
     }, [getInventoryList])
 
+  const columns = useInventoryColumns();
+  const {filteredData, ...filters} = useInventoryFilters(inventorylist);
+  const [globalFilter, setGlobalFilter] = useState('');
+
 
   return <Main>
-    <Container>
-        <InventoryTable inventorylist={inventorylist} />
+    <Container className={styles.inventory}>
+      <InventoryFilters
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        {...filters}
+      />
+      <Table 
+        data={filteredData} 
+        columns={columns} 
+        className={styles}
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+      />
     </Container>
   </Main>
 }
