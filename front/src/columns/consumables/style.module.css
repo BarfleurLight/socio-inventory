@@ -1,0 +1,28 @@
+.image {
+    width: 70px;
+    height: 40px;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 5px;
+  }
+.name {
+  text-align: left;
+  max-width: 750px;
+}
+.models {
+  overflow: auto;
+}
+select {
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+select:focus {
+  outline: none; /* Убираем обводку при фокусе */
+}
+select option {
+  border: none; 
+  margin: 3px;
+}

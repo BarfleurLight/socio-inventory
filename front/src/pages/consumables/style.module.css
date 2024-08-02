@@ -1,0 +1,38 @@
+.consumables {
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.filterConsumables {
+  width: 250px;
+  float: left;
+  align-items: center;
+  margin-left: 30px;
+  width: 300px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+@media screen {
+    .image {
+      width: 25px;
+    }
+    .name {
+      min-width: 200px;
+      max-width: 750px;
+      display: flex;
+    }
+    .type {
+      max-width: 100px;
+    }
+    .count {
+      max-width: 50px;
+    }
+  }

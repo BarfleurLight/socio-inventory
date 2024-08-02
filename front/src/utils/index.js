@@ -3,6 +3,8 @@ import useInventoryList from './use-inventory-list'
 import useInventory from './use-inventory-list'
 import useModels from './use-models'
 import useModel from './use-model'
+import useConsumables from './use-consumables'
+import useConsumable from './use-consumable'
 
 
 export {
@@ -11,4 +13,6 @@ export {
   useInventoryFilters,
   useModel,
   useModels,
+  useConsumables,
+  useConsumable,
 }

@@ -13,18 +13,18 @@ const Model = ({
   return <div className={styles.model}>
     <LinkComponent
         className={styles.model__title}
-        href={`/model/${id}`}
+        href={`/models/${id}`}
         title={<Img className={styles.model__image} src={image} />}
     />
     <div className={styles.model__body}>
       <LinkComponent
           className={styles.model__title}
-          href={`/model/${id}`}
+          href={`/models/${id}`}
           title={name}
       />
       <LinkComponent
           className={styles.model__count}
-          href={`/model/${id}`}
+          href={`/models/${id}`}
           title={
             <div className={styles.model__count}>
               <ModelsIcon type = {type} />{all}

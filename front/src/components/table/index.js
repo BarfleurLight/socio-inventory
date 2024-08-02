@@ -9,7 +9,7 @@ import {
   getFilteredRowModel,
 } from '@tanstack/react-table';
 
-const Table = ({ data, columns, className, globalFilter, setGlobalFilter }) => {
+const Table = ({ data, columns, className, globalFilter, setGlobalFilter, nav }) => {
   const navigate = useNavigate();
   const [sorting, setSorting] = useState([]);
 
@@ -54,7 +54,7 @@ const Table = ({ data, columns, className, globalFilter, setGlobalFilter }) => {
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              onClick={() => navigate(`/inventory/${row.original.id}`)}
+              onClick={() => navigate(`${nav}/${row.original.id}`)}
             >
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className={className[cell.column.columnDef.accessorKey]}>

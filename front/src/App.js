@@ -10,7 +10,7 @@ import emblemImg from './images/emblemImg.png'
 import {
   Inventory,
   Models,
-  // Consumables,
+  Consumables,
   // Map
 } from './pages'
 
@@ -51,6 +51,10 @@ function App() {
         <Route 
           path='/models'
           element = { <Models updateOrders={updateOrders}/>}
+        />
+        <Route 
+          path='/consumables'
+          element = { <Consumables updateOrders={updateOrders}/>}
         />
         <Route 
           path='/'

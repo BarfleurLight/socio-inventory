@@ -41,8 +41,9 @@
 }
 
 .model__count {
-    display: flex;
+  display: flex;
   align-items: center;
   font-size: 20px;
   margin-right: 10px;
+  color: #000000;
 }

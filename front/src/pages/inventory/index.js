@@ -2,8 +2,8 @@ import styles from './style.module.css';
 import api from '../../api'
 import { Container, Main, Table, InventoryFilters } from '../../components'
 import { useInventoryList, useInventoryFilters } from '../../utils/index.js'
-import useInventoryColumns  from '../../columns/inventory/inventory.js'
 import { useEffect, useCallback, useState } from 'react'
+import { InventoryColumns } from '../../columns/index.js'
 
 
 const Inventory = () => {
@@ -22,7 +22,7 @@ const Inventory = () => {
     getInventoryList()
     }, [getInventoryList])
 
-  const columns = useInventoryColumns();
+  const columns = InventoryColumns();
   const {filteredData, ...filters} = useInventoryFilters(inventorylist);
   const [globalFilter, setGlobalFilter] = useState('');
 
@@ -40,6 +40,7 @@ const Inventory = () => {
         className={styles}
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
+        nav='/inventory'
       />
     </Container>
   </Main>
