@@ -4,7 +4,7 @@ import { LinkComponent } from '../index'
 import navigation from '../../configs/navigation'
 import emblemImg from '../../images/emblemImg.png'
 
-const Nav = ({ orders }) => {
+const Nav = ( ) => {
   return <nav className={styles.nav}>
     <div className={styles.nav__container}>
       <ul className={styles.nav__items}>

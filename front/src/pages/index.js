@@ -1,11 +1,14 @@
 import Inventory from './inventory'
 import Models from './models'
 import Consumables from './consumables'
-// import Map from './map'
+import Create from './create'
+import Import from './import'
+
 
 export {
   Inventory,
   Models,
   Consumables,
-  // Map
+  Create,
+  Import
 }

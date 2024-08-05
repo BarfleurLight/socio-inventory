@@ -12,12 +12,12 @@ const navigations = [
     href: '/consumables',
     auth: true
   },{
-    title: 'Карта',
-    href: '/map',
+    title: 'Добавить',
+    href: '/create',
     auth: true
   }, {
-    title: 'Test',
-    href: '/cart',
+    title: 'Импорт',
+    href: '/import',
     auth: true
   }
 ]

@@ -29,7 +29,7 @@ const ConsumablesColumns = () => {
             return (
               <select onClick={(e) => {e.stopPropagation()}}>
                 {models.map(model =>
-                  <option>{model.name}</option>
+                  <option key={model.id}>{model.name}</option>
                   )}
               </select>
             )

@@ -11,21 +11,12 @@ import {
   Inventory,
   Models,
   Consumables,
-  // Map
+  Create,
+  Import
 } from './pages'
 
 function App() {
   const [ menuToggled, setMenuToggled ] = useState(false)
-  const [ orders, setOrders ] = useState(0)
-
-  const updateOrders = (add) => {
-    if (!add && orders <= 0) { return }
-    if (add) {
-      setOrders(orders + 1)
-    } else {
-      setOrders(orders - 1)
-    }
-  }
 
   return (
     <div className={cn("App", {
@@ -42,19 +33,27 @@ function App() {
       >
         <img src={emblemImg} alt=""/>
       </div>
-      <Header orders={orders} />
+      <Header />
       <Routes>
         <Route 
           path='/inventory'
-          element = { <Inventory updateOrders={updateOrders}/>}
+          element = { <Inventory />}
         />
         <Route 
           path='/models'
-          element = { <Models updateOrders={updateOrders}/>}
+          element = { <Models />}
         />
         <Route 
           path='/consumables'
-          element = { <Consumables updateOrders={updateOrders}/>}
+          element = { <Consumables />}
+        />
+        <Route 
+          path='/create'
+          element = { <Create />}
+        />
+        <Route 
+          path='/import'
+          element = { <Import />}
         />
         <Route 
           path='/'

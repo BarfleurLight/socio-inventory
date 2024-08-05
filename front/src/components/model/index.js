@@ -27,7 +27,7 @@ const Model = ({
           href={`/models/${id}`}
           title={
             <div className={styles.model__count}>
-              <ModelsIcon type = {type} />{all}
+              <ModelsIcon type={type} />{all}
             </div>
           }
       />
