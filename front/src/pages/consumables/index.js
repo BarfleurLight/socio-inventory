@@ -10,6 +10,7 @@ const Consumables = () => {
   const {
     consumables,
     setConsumables,
+    navigate
   } = useConsumables()
 
   const getConsumables = useCallback(() => {
@@ -42,7 +43,7 @@ const Consumables = () => {
           className={styles}
           globalFilter={globalFilter}
           setGlobalFilter={setGlobalFilter}
-          nav='/consumables'
+          clickTr={(id) => (navigate(`/consumables/${id}`))}
       />
     </Container>
   </Main>

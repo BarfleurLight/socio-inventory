@@ -6,6 +6,9 @@
     
   
 @media screen {
+  .image {
+    width: 25px;
+  }
   .fullname {
     min-width: 100px;;
   }

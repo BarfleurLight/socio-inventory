@@ -1,0 +1,45 @@
+.card {
+    text-align: left;
+    flex-direction: column;
+    padding: 10px;
+    /* height: 50%;
+    border: solid 1px;
+    border-radius: 10px; */
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card_header {
+    display: flex; /* Используем flex для заголовка */
+    flex-direction: column; /* Располагаем заголовок в колонку */
+    flex-shrink: 0; /* Предотвращает сжатие */
+    width: 100%; /* Занимает всю ширину */
+    
+}
+
+.card_serial_number {
+    font-weight: bold; /* Жирный шрифт для названия и номера */
+    font-size: 1.4rem; /* Увеличенный размер шрифта */
+    margin-bottom: 8px; /* Отступ снизу */
+}
+
+.card_fullname{
+    /* flex-basis: 120px; */
+    flex-shrink: 0;
+    margin-bottom: 6px;
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+}
+
+.card_details {
+    display: flex;
+    flex-direction: column; 
+    font-size: 1.2rem;
+    gap: 4px;
+    /* flex-grow: 1; */
+}

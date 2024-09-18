@@ -5,6 +5,7 @@ import useModels from './use-models'
 import useModel from './use-model'
 import useConsumables from './use-consumables'
 import useConsumable from './use-consumable'
+import useImport from './use-import'
 
 
 export {
@@ -15,4 +16,5 @@ export {
   useModels,
   useConsumables,
   useConsumable,
+  useImport,
 }

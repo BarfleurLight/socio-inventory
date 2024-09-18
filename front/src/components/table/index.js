@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { useNavigate } from 'react-router-dom';
+// import cn from 'classnames'
 import React, { useState } from 'react';
 import {
   useReactTable,
@@ -9,19 +9,23 @@ import {
   getFilteredRowModel,
 } from '@tanstack/react-table';
 
-const Table = ({ data, columns, className, globalFilter, setGlobalFilter, nav }) => {
-  const navigate = useNavigate();
+const Table = ({ data, columns, className, globalFilter, setGlobalFilter, clickTr, }) => {
   const [sorting, setSorting] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const table = useReactTable({
     data: data,
     columns: columns,
+    getRowId: row => row.id,
     state: {
       sorting,
       globalFilter,
+      rowSelection: selectedRows,
+
     },
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
+    onRowSelectionChange: setSelectedRows,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -42,8 +46,8 @@ const Table = ({ data, columns, className, globalFilter, setGlobalFilter, nav })
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
                   {{
-                    asc: ' 🔼',
-                    desc: ' 🔽',
+                    asc: '˄',
+                    desc: '˅',
                   }[header.column.getIsSorted()] ?? null}
                 </th>
               ))}
@@ -54,11 +58,11 @@ const Table = ({ data, columns, className, globalFilter, setGlobalFilter, nav })
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              onClick={() => navigate(`${nav}/${row.original.id}`)}
+              onClick={_ => clickTr && clickTr(row.original.id)}
             >
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className={className[cell.column.columnDef.accessorKey]}>
-                  <div className={styles.test}>
+                  <div className={styles.td_body}>
                     <span>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </span>
@@ -68,6 +72,10 @@ const Table = ({ data, columns, className, globalFilter, setGlobalFilter, nav })
             </tr>
           ))}
         </tbody>
+        {/* <div>
+        <label>Row Selection State:</label>
+        <pre>{JSON.stringify(table.getState().rowSelection, null, 2)}</pre>
+      </div> */}
       </table>
   );
 };

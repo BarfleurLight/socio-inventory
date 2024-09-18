@@ -18,7 +18,7 @@ const ConsumablesColumns = () => {
         header: 'Название',
         accessorKey: 'name',
         cell: ({ row }) => <span className={styles.name}>{row.original.name}</span>,
-        enableSorting: true,  // Включаем сортировку для столбца
+        enableSorting: true,
       },
       { 
         header: 'Модели',

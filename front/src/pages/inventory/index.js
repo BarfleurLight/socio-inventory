@@ -7,7 +7,11 @@ import { InventoryColumns } from '../../columns/index.js'
 
 
 const Inventory = () => {
-  const {inventorylist, setInventoryList } = useInventoryList()
+  const {
+    inventorylist,
+    setInventoryList,
+    navigate
+     } = useInventoryList()
 
   const getInventoryList = useCallback(() => {
       api
@@ -40,7 +44,7 @@ const Inventory = () => {
         className={styles}
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
-        nav='/inventory'
+        clickTr={(id) => (navigate(`/inventory/${id}`))}
       />
     </Container>
   </Main>
