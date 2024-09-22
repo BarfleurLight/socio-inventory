@@ -43,13 +43,15 @@ const inventoryList = [
           id: 3,
           name: 'Lenovo V530',
          },
-        serial_number: '000999333',
+        serial_number: '000156',
         status_real: 'Действ',
         status_doc: 'Списан',
         status_online: 'now',
         current_responsible: 'Синяков',
         room_real: 413,
-        room_doc: 19
+        room_doc: 19,
+        according_data: "12.08.2021",
+        balans_price:'10000.00'
       }
 ]
 

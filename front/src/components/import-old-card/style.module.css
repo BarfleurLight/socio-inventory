@@ -9,33 +9,35 @@
     height: 100%;
   }
 
-.card_body {
-    height: 38vh;
-    /* display: flex; */
-    /* justify-content: space-between; */
+.old_card {
+    height: calc(100vh - 60px - 48px - 48px - 22px);
+    display: flex;
     flex-direction: column;
+}
+
+.full_card {
+    display: flex;
+    flex-direction: column;
+}
+
+.short_card {
+    height: 50%;
 }
 
 .card_details {
     height: 100%;
-    /* height: 20px; */
-    transition: height .5s ease;
-
-}
-.card_details.show {
-    /* height: 100%; */
-    /* height: 60vh; */
-} 
-
-.details {
-    height: 100%;
-}
-.card_summary {
-    max-height: 0; 
-    overflow: hidden;
-    transition: max-height 0.5s ease;
+    width: 80%;
 }
 
+.button_containeer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button {
+    position: relative;
+    bottom: 40px; left: 0px;
+}
 
 .image {
     width: 140px;

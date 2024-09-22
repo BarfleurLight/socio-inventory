@@ -1,5 +1,6 @@
 import styles from './style.module.css'
 import api from '../../api'
+import cn from 'classnames'
 import { Container, Main, Button, Table,  ImportNewCard, ImportOldCard } from '../../components'
 import { useImport } from '../../utils/index.js'
 import { ImportColumns } from '../../columns/index.js'
@@ -54,7 +55,8 @@ const Import = () => {
 
   const [globalFilter, setGlobalFilter] = useState('');
   const columns = ImportColumns();
-
+  const [isOpen, setIsOpen] = useState(false);
+  
   return <Main>
     <Container>
       <header>
@@ -78,19 +80,28 @@ const Import = () => {
           className={styles}
           globalFilter={globalFilter}
           setGlobalFilter={setGlobalFilter}
-          clickTr={getCurruntImport}
+          clickTr={(id) => {
+            if (isOpen) {
+              setTimeout(() => getCurruntImport(id), 300);
+            } else {
+              getCurruntImport(id)
+            }
+            setIsOpen(false);
+            }}
         />
       </div>
       <div className={styles.right}>
-
-        {/* <div className={styles.top}> */}
-        <ImportOldCard {...currentInventory}/>
-        {/* </div> */}
+        <div className={cn(styles.top, {[styles.show]: isOpen})}>
+          <ImportOldCard 
+            {...currentInventory} 
+            isOpen={isOpen} 
+            setIsOpen={setIsOpen}
+          />
+        </div>
         <div className={styles.bot}>
-        <ImportNewCard {...currentImport}/>
+          <ImportNewCard {...currentImport}/>
         </div>
       </div>
-
     </div>
     <div >
       <Button>Удалить выбраные</Button>

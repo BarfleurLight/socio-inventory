@@ -2,8 +2,6 @@ import React from 'react'
 import styles from './style.module.css'
 import ImportNewCard from '../import-new-card';
 import { Img } from '../../components';
-import { useState } from 'react'
-import cn from 'classnames'
 
 
 const ImportOldCard = ({ 
@@ -11,7 +9,7 @@ const ImportOldCard = ({
     image,
     fullname,
     shortname,
-    model,
+    model={},
     serial_number,
     status_real,
     status_doc,
@@ -20,14 +18,14 @@ const ImportOldCard = ({
     room_real,
     room_doc,
     according_data,
-    balans_price
+    balans_price,
+    isOpen,
+    setIsOpen,
  }) => {
-    const [isOpen, setIsOpen] = useState(false);
 
-
-  return <div className={cn(styles.card, {[styles.show]: isOpen})}>
-    <div hidden={serial_number} >Карточка не найдена</div>
-    <div className={styles.card_body} hidden={!serial_number} > 
+  return <div className={styles.old_card} >
+      <div hidden={serial_number} >Карточка не найдена</div> 
+      <div className={styles.short_card}>
         <ImportNewCard 
           fullname={fullname}
           serial_number={serial_number}
@@ -36,20 +34,25 @@ const ImportOldCard = ({
           according_data={according_data}
           balans_price={balans_price}
         />
-        <div className={cn(styles.card_details, {[styles.show]: isOpen})} >
-          <button onClick={() => setIsOpen(!isOpen)}>Подробнее</button>
-          <div className={styles.details} >
-          <Img className={styles.image} src={image}/>
-            {/* <p>{model.name}</p> className={cn(styles.card_summary, {[styles.show]: isOpen})}*/}
-            <p>{status_real}</p>
-            <p>{status_online}</p>
-            <p>{room_real}</p>
-            <p>{room_doc}</p>
-        </div>
+      </div>
+        <div className={styles.full_card}  hidden={!serial_number}>
+          <div className={styles.button_containeer} >
+            <button className={styles.button} onClick={() => setIsOpen(!isOpen)} hidden={!serial_number}>Подробнее</button>
+          </div>
+          <div className={styles.card_details} >
+            <Img className={styles.image} src={image}/>
+              <p>{model.name}</p>
+              <p>{status_real}</p>
+              <p>{status_online}</p>
+              <p>{room_real}</p>
+              <p>{room_doc}</p>
+              <p>asdasdasd</p>
+            
+          </div>
+          
         </div>
 
     </div>
-  </div>
 }
 
 export default ImportOldCard
