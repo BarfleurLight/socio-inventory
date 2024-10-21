@@ -17,6 +17,12 @@
     "react-textfit": "^1.1.1",
     "web-vitals": "^2.1.4"
   },
+  "overrides": {
+    "react-textfit": {
+      "react": ">=15.0.0",
+      "react-dom": ">=15.0.0"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

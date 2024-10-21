@@ -1,0 +1,11 @@
+.icon {
+    display: inline-block;
+    text-align: center;
+    background: 50% no-repeat;
+    background-size: contain;
+    transition: transform 200ms;
+}
+
+.icon.select {
+    transform: rotate(180deg);
+}

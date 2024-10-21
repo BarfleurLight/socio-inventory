@@ -2,8 +2,6 @@ import { Container, Main, Model } from '../../components'
 import { useModels } from '../../utils/index.js'
 import { useEffect, useCallback } from 'react'
 import api from '../../api'
-
-// import classNames from 'classnames'
 import styles from './style.module.css'
 
 

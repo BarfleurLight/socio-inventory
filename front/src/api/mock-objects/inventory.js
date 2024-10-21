@@ -1,7 +1,7 @@
 const inventoryList = [
     {
         id: 1,
-        image: 'https://foodgram.mvobr.ru/backend_media/recipes/images/temp.jpeg',
+        image: 'https://100system.com/upload/iblock/a0e/0wl7yigd4tvnqwedipcigrgi9da244oq/sharp_MX-M266NVEU-about.webp',
         fullname: 'МФУ SHARP MX-M266NVEU',
         shortname: 'SHARP 266NV',
         // model object
@@ -20,7 +20,7 @@ const inventoryList = [
         balans_price:'53000.00'
       },{
         id: 2,
-        image: 'URL_photo2',
+        image: 'https://cdn1.technopark.ru/technopark/photos_resized/product/1000_1000/73614/1_73614.jpg',
         fullname: 'Моноблок MSI Adora 20 2M-026RU White',
         shortname: 'MSI Adora 20 2BT',
         model: {

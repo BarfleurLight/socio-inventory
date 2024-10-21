@@ -10,7 +10,8 @@
 }
 
 .model__image {
-    height: 240px;
+    /* height: 240px; */
+    height: 160px;
     width: 100%;
     background-position: center;
     background-size: cover;

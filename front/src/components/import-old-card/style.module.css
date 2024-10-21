@@ -26,17 +26,29 @@
 
 .card_details {
     height: 100%;
-    width: 80%;
+    /* width: 80%; */
 }
 
 .button_containeer{
     display: flex;
     justify-content: flex-end;
+    height: 0px;
+}
+
+.button_containeer.show {
+    display: none;
 }
 
 .button {
     position: relative;
-    bottom: 40px; left: 0px;
+    bottom: 25px; left: 0px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.button_text {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .image {
@@ -46,3 +58,9 @@
     background-size: cover;
     border-radius: 5px;
   }
+
+@media screen and (max-width: 950px) {
+    .old_card {
+        height: calc(100vh - 60px - 48px - 40px);
+    }
+}

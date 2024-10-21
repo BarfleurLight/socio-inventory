@@ -56,12 +56,19 @@ const Import = () => {
   const [globalFilter, setGlobalFilter] = useState('');
   const columns = ImportColumns();
   const [isOpen, setIsOpen] = useState(false);
+  const [cardOpen, setCardOpen] = useState(false);
   
   return <Main>
     <Container>
       <header>
         <div className={styles.filters}>
-          Фильтры
+          <input
+            type="text"
+            value={globalFilter || ''}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            placeholder="Поиск..."
+            className={styles.globalFilter}
+          />
         </div>
         <div className={styles.file}>
           <span>Имя файла</span>
@@ -73,6 +80,7 @@ const Import = () => {
         </div>
       </header>
     <div className={styles.body}>
+      
       <div className={styles.left}>
         <Table 
           data={listImport}
@@ -87,10 +95,12 @@ const Import = () => {
               getCurruntImport(id)
             }
             setIsOpen(false);
+            setCardOpen(true);
             }}
         />
       </div>
-      <div className={styles.right}>
+      <div className={cn(styles.right, {[styles.open]: cardOpen})}
+      >
         <div className={cn(styles.top, {[styles.show]: isOpen})}>
           <ImportOldCard 
             {...currentInventory} 
@@ -102,6 +112,16 @@ const Import = () => {
           <ImportNewCard {...currentImport}/>
         </div>
       </div>
+      <div 
+        className={cn(styles.back, {[styles.open]: cardOpen})}
+        onClick={() => {
+          if (isOpen) {
+            setTimeout(() => setCardOpen(false), 300);
+          } else {
+            setCardOpen(false)
+          }
+          setIsOpen(false);
+          }}></div>
     </div>
     <div >
       <Button>Удалить выбраные</Button>

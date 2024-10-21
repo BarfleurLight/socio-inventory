@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './style.module.css'
 import { LinkComponent, Img } from '../index.js'
-import ModelsIcon from '../icons/models'
+import { ModelsIcon } from '../icons'
 
 const Model = ({
     id,

@@ -3,6 +3,11 @@ table {
     border-spacing: 0 5px; 
   }
 
+thead {
+  position: sticky;
+  z-index: 1;
+  top: -1px;
+}  
 thead tr {
     background-color: #f8f8f8;
     cursor: pointer; 
