@@ -1,4 +1,8 @@
 .idea
-/back/venv/*
+.vscode
+venv/
+__pycache__/
+.env
+.env.example
 /back/db.sqlite3
 front/node_modules
