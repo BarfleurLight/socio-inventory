@@ -4,7 +4,6 @@ const inventoryList = [
         image: 'https://100system.com/upload/iblock/a0e/0wl7yigd4tvnqwedipcigrgi9da244oq/sharp_MX-M266NVEU-about.webp',
         fullname: 'МФУ SHARP MX-M266NVEU',
         shortname: 'SHARP 266NV',
-        // model object
         model: {
           id: 0,
           name: 'SHARP',
@@ -17,7 +16,9 @@ const inventoryList = [
         room_real: 101,
         room_doc: 207,
         according_data: "12.08.2021",
-        balans_price:'53000.00'
+        balans_price:'53000.00',
+        ip: '192.168.2.15',
+        mac: 'a0:54:9f:53:b2:6e',
       },{
         id: 2,
         image: 'https://cdn1.technopark.ru/technopark/photos_resized/product/1000_1000/73614/1_73614.jpg',
@@ -29,11 +30,13 @@ const inventoryList = [
          },
         serial_number: '000999222000999222000999222000999222000999222000999222',
         status_real: 'К списанию',
-        status_doc: 'К списанию',
+        status_doc: 'Списан',
         status_online: '3 часа назад',
         current_responsible: 'Синяков Алексей Викторович',
         room_real: 403,
-        room_doc: 419
+        room_doc: 419,
+        ip: '191.168.2.15',
+        mac: 'a0:54:9f:53:b2:6e',
       },{
         id: 3,
         image: 'URL_photo3',
@@ -51,7 +54,9 @@ const inventoryList = [
         room_real: 413,
         room_doc: 19,
         according_data: "12.08.2021",
-        balans_price:'10000.00'
+        balans_price:'10000.00',
+        ip: '190.168.2.15',
+        mac: 'a0:54:9f:53:b2:6e',
       }
 ]
 
