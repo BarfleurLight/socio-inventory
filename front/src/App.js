@@ -9,6 +9,7 @@ import emblemImg from './images/emblemImg.png'
 
 import {
   Inventory,
+  InventoryDetail,
   Models,
   Consumables,
   Create,
@@ -38,6 +39,10 @@ function App() {
         <Route 
           path='/inventory'
           element = { <Inventory />}
+        />
+        <Route 
+          path='/inventory/:id'
+          element={<InventoryDetail />}
         />
         <Route 
           path='/models'
