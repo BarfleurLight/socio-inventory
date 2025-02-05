@@ -24,12 +24,16 @@ const InventoryColumns = () => {
         id: 'image',
         accessorKey: 'image',
         enableSorting: false,
-        cell: ({ row }) => (<Img className={styles.image} src={row.original.image}/>)
+        cell: ({ row }) => <Img 
+          className={styles.image} 
+          src={row.original.image}
+          />,
       },
       { 
         header: 'Полное название', 
         accessorKey: 'fullname',
-        enableSorting: true,  // Включаем сортировку для столбца
+        cell: ({ row }) => <span>{row.original.fullname}</span>,
+        enableSorting: true,
       },
       {
         header: 'Модель',
@@ -47,38 +51,49 @@ const InventoryColumns = () => {
             >{model_name}</span>
           );
         },
-        enableSorting: true,  // Включаем сортировку для столбца
+        enableSorting: true,
       },
       { 
         header: 'Инв. номер', 
         accessorKey: 'serial_number',
-        enableSorting: true,  // Включаем сортировку для столбца
+        enableSorting: true,
+        cell: ({ row }) => <span>{row.original.serial_number}</span>,
       },
       {
-        header: 'Статус док./реал.',
-        accessorFn: row => `${row.status_doc}${`/`}${row.status_real}`,
-        accessorKey: 'status',
-        enableSorting: true,  // Включаем сортировку для столбца
+        header: 'Ip/MAC', 
+        accessorKey: 'ip',
+        enableSorting: true,
+        cell: ({ row }) => <span>
+            {row.original.ip}{'\n'}{row.original.mac}
+          </span>,
+      },
+      {
+        header: 'Статус \n док./реал.',
+        cell: ({ row }) => <span>
+            {row.original.status_doc}{'\n'}{row.original.status_real}
+          </span>,
+        accessorKey: 'status_doc',
+        enableSorting: true,
         meta: {
           filterVariant: 'select',
         },
       },
-      { 
-        header: 'Статус онлайн', 
-        accessorKey: 'status_online',
-        enableSorting: true,  // Включаем сортировку для столбца
-      },
+      // { 
+      //   header: 'Статус онлайн', 
+      //   accessorKey: 'status_online',
+      //   enableSorting: true,
+      // },
       {
-        header: 'Ответственный',
+        header: 'Ответств.',
         accessorKey: 'current_responsible',
-        cell: ({ row }) => <span>{formatName(row.original.current_responsible)}</span>,
-        enableSorting: true,  // Включаем сортировку для столбца
+        accessorFn: row => `${formatName(row.current_responsible)}`,
+        enableSorting: true,
       },
       {
-        header: 'Комната док./реал.',
+        header: 'Комната \n док./реал.',
         accessorKey: 'room',
-        accessorFn: row => `${row.room_doc}${`/`}${row.room_real}`,
-        enableSorting: true,  // Включаем сортировку для столбца
+        accessorFn: row => `${row.room_doc}${'\n'}${row.room_real}`,
+        enableSorting: true,
       },
     ],
     [navigate]

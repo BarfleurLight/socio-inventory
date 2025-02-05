@@ -65,6 +65,7 @@ const ImportColumns = () => {
       { 
         header: 'Полное название', 
         accessorKey: 'fullname',
+        cell: ({ row }) => <span>{row.original.fullname}</span>,
         enableSorting: true,  // Включаем сортировку для столбца
       },
       { 

@@ -62,11 +62,7 @@ const Table = ({ data, columns, className, globalFilter, setGlobalFilter, clickT
             >
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className={className[cell.column.columnDef.accessorKey]}>
-                  <div className={styles.td_body}>
-                    <span>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </span>
-                  </div>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
             </tr>
