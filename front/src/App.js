@@ -13,7 +13,8 @@ import {
   Models,
   Consumables,
   Create,
-  Import
+  Import,
+  ErrorPage,
 } from './pages'
 
 function App() {
@@ -61,9 +62,17 @@ function App() {
           element = { <Import />}
         />
         <Route 
+          path='/error'
+          element={<ErrorPage />}
+        />
+        <Route 
           path='/'
           element={ <Navigate to='/inventory' /> }
           />
+        <Route 
+          path='*'
+          element={ <Navigate to='/error' /> }
+        />
       </Routes>
       <Footer />
     </div>
