@@ -10,7 +10,8 @@
     width: 25px;
   }
   .fullname {
-    min-width: 100px;;
+    min-width: 100px;
+    font-size: 16px;
   }
 
   .model {
@@ -22,11 +23,11 @@
   .status {
     word-wrap: break-word;
   }
-  .status_online {
-
+  .status_doc {
+    min-width: 85px;
   }
   .current_responsible {
-
+    min-width: 80px;
   }
   .room {
     max-width: 75px;

@@ -1,11 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { useMemo } from 'react'
 import styles from './style.module.css';
-import { Img } from '../../components';
+import { Img, LinkComponent } from '../../components';
 
 
 const InventoryColumns = () => {
-  const navigate = useNavigate();
 
   const formatName = (fullName) => {
     const parts = fullName.split(' ');
@@ -32,57 +30,45 @@ const InventoryColumns = () => {
       { 
         header: 'Полное название', 
         accessorKey: 'fullname',
-        cell: ({ row }) => <span>{row.original.fullname}</span>,
+        cell: ({ row }) => <div>
+          <LinkComponent 
+              href={`/inventory/${row.original.id}`}
+              title={row.original.fullname}
+            />
+          <div 
+            className={styles.ser_num}
+            >Серийный номер:{row.original.serial_number}
+          </div>
+        </div>,
         enableSorting: true,
       },
       {
         header: 'Модель',
         accessorKey: 'model',
-        cell: ({ row }) => {
-          const model_id = row.original.model.id;
-          const model_name = row.original.model.name;
-          return (
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate(`/model/${model_id}`);
-              }}
-              className={styles.link}
-            >{model_name}</span>
-          );
-        },
+        cell: ({ row }) => <LinkComponent 
+              href={`/model/${row.original.model.id}`}
+              title={row.original.model.name}
+            />,
         enableSorting: true,
-      },
-      { 
-        header: 'Инв. номер', 
-        accessorKey: 'serial_number',
-        enableSorting: true,
-        cell: ({ row }) => <span>{row.original.serial_number}</span>,
       },
       {
-        header: 'Ip/MAC', 
+        header: 'Ip', 
         accessorKey: 'ip',
         enableSorting: true,
-        cell: ({ row }) => <span>
-            {row.original.ip}{'\n'}{row.original.mac}
-          </span>,
+        accessorFn: row => `${row.ip.join('\n')}`,
+      },
+      {
+        header: 'MAC', 
+        accessorKey: 'mac',
+        enableSorting: true,
+        accessorFn: row => `${row.mac.join('\n')}`,
       },
       {
         header: 'Статус \n док./реал.',
-        cell: ({ row }) => <span>
-            {row.original.status_doc}{'\n'}{row.original.status_real}
-          </span>,
         accessorKey: 'status_doc',
+        accessorFn: row => `${row.status_doc}${'\n'}${row.status_real}`,
         enableSorting: true,
-        meta: {
-          filterVariant: 'select',
-        },
       },
-      // { 
-      //   header: 'Статус онлайн', 
-      //   accessorKey: 'status_online',
-      //   enableSorting: true,
-      // },
       {
         header: 'Ответств.',
         accessorKey: 'current_responsible',
@@ -96,7 +82,7 @@ const InventoryColumns = () => {
         enableSorting: true,
       },
     ],
-    [navigate]
+    []
   );
 };
 

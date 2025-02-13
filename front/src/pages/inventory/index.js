@@ -10,7 +10,6 @@ const Inventory = () => {
   const {
     inventorylist,
     setInventoryList,
-    navigate
      } = useInventoryList()
 
   const getInventoryList = useCallback(() => {
@@ -44,7 +43,6 @@ const Inventory = () => {
         className={styles}
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
-        clickTr={(id) => (navigate(`/inventory/${id}`))}
       />
     </Container>
   </Main>
