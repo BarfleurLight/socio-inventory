@@ -1,9 +1,17 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const InventoryDetail = () => {
   const { id } = useParams();
-  
+  const navigate = useNavigate();
+
+  const isValidId = /^\d+$/.test(id);
+
+  React.useEffect(() => {
+    if (!isValidId) {
+      navigate('/error'); 
+    }
+  }, [isValidId, navigate]);
 
   return (
     <div>
