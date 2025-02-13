@@ -17,8 +17,8 @@ const inventoryList = [
         room_doc: 207,
         according_data: "12.08.2021",
         balans_price:'53000.00',
-        ip: '192.168.2.15',
-        mac: 'a0:54:9f:53:b2:6e',
+        ip: ['191.168.2.15', '191.168.2.15'],
+        mac: ['a0:54:9f:53:b2:6e', 'a0:54:9f:53:b2:6e'],
       },{
         id: 2,
         image: 'https://cdn1.technopark.ru/technopark/photos_resized/product/1000_1000/73614/1_73614.jpg',
@@ -28,15 +28,15 @@ const inventoryList = [
           id: 2,
           name: 'MSI Andora 20',
          },
-        serial_number: '000999222000999222000999222000999222000999222000999222',
+        serial_number: '0009992220009992220009992220009992',
         status_real: 'К списанию',
         status_doc: 'Списан',
         status_online: '3 часа назад',
         current_responsible: 'Синяков Алексей Викторович',
         room_real: 403,
         room_doc: 419,
-        ip: '191.168.2.15',
-        mac: 'a0:54:9f:53:b2:6e',
+        ip: ['191.168.2.15', '191.168.2.15'],
+        mac: ['a0:54:9f:53:b2:6e',],
       },{
         id: 3,
         image: 'URL_photo3',
@@ -55,8 +55,8 @@ const inventoryList = [
         room_doc: 19,
         according_data: "12.08.2021",
         balans_price:'10000.00',
-        ip: '190.168.2.15',
-        mac: 'a0:54:9f:53:b2:6e',
+        ip: ['191.168.2.15', '191.168.2.15'],
+        mac: ['a0:54:9f:53:b2:6e',],
       }
 ]
 

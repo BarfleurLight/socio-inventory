@@ -16,8 +16,13 @@
   cursor: pointer;
   width: max-content;
   box-sizing: border-box;
-  background: #E5C07B;
+  background: #f3b84c;
   color: #000000;
+  /* opacity: 0.90; */
+}
+
+.button:hover {
+  background: #bb8115;
 }
   
 .button:active {
