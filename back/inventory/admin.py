@@ -59,10 +59,10 @@ class MACAdmin(admin.ModelAdmin):
 
 @admin.register(Models)
 class ModelsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'model_type', 'get_html_image', 'consumables_count')
+    list_display = ('name', 'model_type', 'get_html_image', 'inventory_count')
     list_per_page = 20
     search_fields = ('name', 'model_type')
-    readonly_fields = ('get_html_image', 'consumables_count')
+    readonly_fields = ('get_html_image', 'inventory_count')
     filter_horizontal = ('consumables',)
     
     def get_html_image(self, obj):
@@ -71,9 +71,9 @@ class ModelsAdmin(admin.ModelAdmin):
         return "Нет изображения"
     get_html_image.short_description = "Изображение"
     
-    def consumables_count(self, obj):
-        return obj.consumables.count()
-    consumables_count.short_description = "Кол-во расходников"
+    def inventory_count(self, obj):
+        return obj.inventory_items.count()
+    inventory_count.short_description = "Кол-во оборудования"
 
 
 class InventoryAttributeInline(admin.TabularInline):
