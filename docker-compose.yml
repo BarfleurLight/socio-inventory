@@ -1,0 +1,39 @@
+version: '3.3'
+
+volumes:
+  static:
+  backend_static:
+  backend_media:
+  postgres_data:
+
+services:
+  db:
+    image: postgres:14
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backend:
+    image: mvobr/inventory_back
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      - db
+    volumes:
+      - backend_static:/app/static
+      - backend_media:/app/media
+  frontend:
+    image: mvobr/inventory_front
+    env_file: .env
+    volumes:
+      - static:/app/result_build/build
+  nginx:
+    image: nginx:1.19.3
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static:/usr/share/nginx/html/
+      - backend_static:/backend_static
+      - backend_media:/backend_media
