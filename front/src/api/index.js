@@ -10,6 +10,20 @@ class Api {
       this._headers = headers
     }
 
+  checkResponse(res) {
+    if (!(res instanceof Response)) {
+      return Promise.resolve(res); 
+    }
+    
+    return new Promise((resolve, reject) => {
+      if (res.status === 204) {
+        return resolve(res);
+      }
+      const func = res.status < 400 ? resolve : reject;
+      res.json().then(data => func(data));
+    });
+  }
+
   // Список всего оборудования
   getInventoryList ( ) {
     const mockResponse = inventoryList
@@ -28,10 +42,21 @@ class Api {
   }
 
   // Модели
-  getModels ( ) {
-    const mockResponse = models
+  // getModels ( ) {
+  //   const mockResponse = models
 
-    return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
+  //   return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
+  // }
+  getModels() {
+    const token = localStorage.getItem('token')
+    
+    return fetch(`/api/v1/models/`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'Authorization': token ? `Token ${token}` : ''
+      }
+    }).then(this.checkResponse) // ← Используем вашу checkResponse
   }
 
   // Расходники  
