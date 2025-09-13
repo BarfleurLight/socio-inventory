@@ -1,4 +1,3 @@
-import consumables from './mock-objects/consumables'
 import importList from './mock-objects/import'
 import inventoryList from './mock-objects/inventory'
 
@@ -52,12 +51,15 @@ class Api {
 
   // Расходники  
   getConsumables ( ) {
-    const mockResponse = consumables
-
-    return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
+    return fetch(`/api/v1/consumables/`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+      }
+    }).then(this.checkResponse)
   }
 
-  //ИпортЫ
+  //Ипорты
   getImports ( ) {
     const mockResponse = importList
 

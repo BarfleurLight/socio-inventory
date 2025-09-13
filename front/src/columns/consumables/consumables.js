@@ -40,7 +40,7 @@ const ConsumablesColumns = () => {
       },
       { 
         header: 'Тип', 
-        accessorKey: 'type',
+        accessorKey: 'cons_type',
         enableSorting: true,  // Включаем сортировку для столбца
       },
       {

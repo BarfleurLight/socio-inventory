@@ -1,7 +1,7 @@
 import styles from './style.module.css'
 import { Container, Main, Table } from '../../components'
 import { useConsumables } from '../../utils/index.js'
-import { useEffect, useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 import api from '../../api'
 import { ConsumablesColumns } from '../../columns/index.js'
 
@@ -13,17 +13,16 @@ const Consumables = () => {
     navigate
   } = useConsumables()
 
-  const getConsumables = useCallback(() => {
+  const getConsumables = () => {
     api.getConsumables()
       .then(res => {
-        const { results } = res;
-        setConsumables(results);
+        setConsumables(res);
       });
-  }, [setConsumables]);
+  }
 
   useEffect(_ => {
     getConsumables()
-    }, [getConsumables])
+  }, [])
   
   const columns = ConsumablesColumns();
   const [globalFilter, setGlobalFilter] = useState('');
