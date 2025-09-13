@@ -1,7 +1,6 @@
 import consumables from './mock-objects/consumables'
 import importList from './mock-objects/import'
 import inventoryList from './mock-objects/inventory'
-import models from './mock-objects/models'
 
 
 class Api {
@@ -42,21 +41,13 @@ class Api {
   }
 
   // Модели
-  // getModels ( ) {
-  //   const mockResponse = models
-
-  //   return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
-  // }
   getModels() {
-    const token = localStorage.getItem('token')
-    
     return fetch(`/api/v1/models/`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        'Authorization': token ? `Token ${token}` : ''
       }
-    }).then(this.checkResponse) // ← Используем вашу checkResponse
+    }).then(this.checkResponse)
   }
 
   // Расходники  

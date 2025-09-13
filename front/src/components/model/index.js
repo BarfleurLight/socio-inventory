@@ -7,8 +7,8 @@ const Model = ({
     id,
     image,
     name,
-    type,
-    all,
+    model_type,
+    count,
   }) => {
   return <div className={styles.model}>
     <LinkComponent
@@ -27,7 +27,7 @@ const Model = ({
           href={`/models/${id}`}
           title={
             <div className={styles.model__count}>
-              <ModelsIcon type={type} />{all}
+              <ModelsIcon type={model_type} />{count}
             </div>
           }
       />

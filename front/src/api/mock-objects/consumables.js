@@ -1,7 +1,7 @@
 const consumables = [
     {
         id: 1,
-        image: 'https://foodgram.mvobr.ru/backend_media/recipes/images/temp.jpeg',
+        image: 'URL_photo3',
         name: 'USB флеш-накопитель TECHKEY, водонепроницаемый флеш-накопитель 64 ГБ 32 ГБ 16 ГБ 8 ГБ 4 ГБ, серебристая флешка, U-диск,',
         type: 'usb-flash',
         models: [],

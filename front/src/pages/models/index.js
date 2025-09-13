@@ -11,17 +11,19 @@ const Models = () => {
     setModels,
   } = useModels()
 
-  const getModels = useCallback(() => {
+  const getModels = () => {
     api.getModels()
-      .then(res => {
-        const { results } = res;
-        setModels(results);
+      .then(models => {
+        setModels(models);
+      })
+      .catch(error => {
+        console.error('Ошибка:', error);
       });
-  }, [setModels]);
+  }
 
 useEffect(_ => {
   getModels()
-  }, [getModels])
+  }, [])
 
   return <Main>
     <Container className={styles.models}>
