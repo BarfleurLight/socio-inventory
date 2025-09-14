@@ -75,8 +75,14 @@ class Api {
   }
 
   //загрузка файла
-  downloadFile () {
-    console.log('файл загружен')
+  downloadFile (file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    return fetch(`/api/v1/import/inventory/`, {
+      method: 'POST',
+      body: formData,
+    }).then(this.checkResponse);
   }
 
 }

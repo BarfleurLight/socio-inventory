@@ -2,10 +2,6 @@ header {
     display: flex;
 }
 
-.file {
-  color: rgb(60, 13, 200);
-}
-
 .filters {
     width: 65%;
     /* border: solid 0.1px; */

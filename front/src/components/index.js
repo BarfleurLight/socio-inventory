@@ -11,6 +11,8 @@ import Img from './image'
 import Table from './table'
 import ImportNewCard from './import-new-card'
 import ImportOldCard from './import-old-card'
+import FileInput from './file-input'
+
 
 export {
   Header,
@@ -25,5 +27,6 @@ export {
   InventoryFilters,
   Img,
   ImportNewCard,
-  ImportOldCard
+  ImportOldCard,
+  FileInput
 }

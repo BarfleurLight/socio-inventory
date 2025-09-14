@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    align-items: center;
+  }
+  
+.button {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  background: none;
+  border-radius: 6px;
+  padding: 0px 24px;
+  height: 48px;
+  line-height: 48px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.2s;
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+  width: max-content;
+  box-sizing: border-box;
+  background: #f3b84c;
+  color: #000000;
+  /* opacity: 0.90; */
+}
+
+.button:hover {
+  background: #bb8115;
+}
+  
+.button:active {
+  box-shadow: 0 0 7px #ddd;
+}
+
+.button_disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 950px) {
+    .button {
+      font-size: 12px!important;
+      padding: 0px 12px;
+      height: 32px;
+      line-height: 30px;
+    }
+  }

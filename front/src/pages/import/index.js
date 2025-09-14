@@ -1,7 +1,7 @@
 import styles from './style.module.css'
 import api from '../../api'
 import cn from 'classnames'
-import { Container, Main, Button, Table,  ImportNewCard, ImportOldCard } from '../../components'
+import { Container, Main, Button, Table,  ImportNewCard, ImportOldCard, FileInput } from '../../components'
 import { useImport } from '../../utils/index.js'
 import { ImportColumns } from '../../columns/index.js'
 import { useEffect, useCallback, useState } from 'react'
@@ -17,6 +17,22 @@ const Import = () => {
     setCurruntInventory
   } = useImport()
 
+  const [downloadFile, setDownloadFile] = useState(null)
+  const [currentFile, setCurrentFile] = useState(null)
+
+  const handleFileUpload = (file) => {
+    setCurrentFile(file)
+    
+    api.downloadFile(file)
+      .then(response => {
+        setDownloadFile(response)
+      })
+      .catch(error => {
+        console.error('Ошибка загрузки:', error)
+        setDownloadFile(null)
+      })
+  }
+
   const getImport = useCallback(() => {
     api.getImports()
       .then(res => {
@@ -25,14 +41,10 @@ const Import = () => {
       });
   }, [setImport]);
 
-  // getImport()
   useEffect(_ => {
     getImport()
     }, [getImport])
 
-  const downloadDocument = () => {
-    api.downloadFile()
-  }
 
   const getCurruntInventory = useCallback(({ id, serial_number}) => {
     api.getInventory({ id, serial_number})
@@ -70,17 +82,12 @@ const Import = () => {
             className={styles.globalFilter}
           />
         </div>
-        <div className={styles.file}>
-          <span>Имя файла</span>
-          <Button
-            clickHandler={downloadDocument}
-            className={styles.button}
-            disabled={false}
-          >Добавить файл</Button>
-        </div>
+        <FileInput
+          onChange={handleFileUpload}
+          currentFile={currentFile}
+        />
       </header>
     <div className={styles.body}>
-      
       <div className={styles.left}>
         <Table 
           data={listImport}
