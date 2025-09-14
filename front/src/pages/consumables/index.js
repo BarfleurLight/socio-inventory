@@ -42,7 +42,7 @@ const Consumables = () => {
           className={styles}
           globalFilter={globalFilter}
           setGlobalFilter={setGlobalFilter}
-          clickTr={(id) => (navigate(`/consumables/${id}`))}
+          clickTr={(item) => (navigate(`/consumables/${item.id}`))}
       />
     </Container>
   </Main>

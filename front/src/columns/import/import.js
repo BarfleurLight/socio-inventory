@@ -1,9 +1,7 @@
 import { useMemo } from 'react'
 import styles from './style.module.css';
 
-
 const ImportColumns = () => {
-
 
   const formatName = (fullName) => {
     const parts = fullName.split(' ');
@@ -15,88 +13,86 @@ const ImportColumns = () => {
     return fullName;
   };
 
-  return  useMemo(
+  const formatCell = (row, fieldName, formatter = null) => {
+    const curValue = row.original.inventory_current[fieldName];
+    const prevValue = row.original.inventory_previous?.[fieldName] ?? '---';
+
+    const formattedCurrent = formatter ? formatter(curValue) : curValue;
+    const formattedPrevious = formatter ? formatter(prevValue) : prevValue;
+    const hasChanged = formattedCurrent === formattedPrevious
+
+    if (hasChanged) {
+      return (
+        <div>
+          <div>{formattedPrevious}</div>
+          <div>{formattedCurrent}</div>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <div className={styles.oldValue}>{formattedPrevious}</div>
+        <div className={styles.newValue}>{formattedCurrent}</div>
+      </div>
+    );
+  }
+
+  return useMemo(
     () => [
-      {
-        id: 'selection',
-        accessorKey: 'selection',
-        enableSorting: false,
-        header: ({ table }) => (
-        <label 
-          className={styles.ch_lb}
-        >
-          <input
-            type="checkbox"
-            className={styles.ch_in}
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              // indeterminate: table.getIsSomeRowsSelected(),
-              onChange: table.getToggleAllRowsSelectedHandler(),
-            }}
-          />
-          <span className={styles.ch_sp}></span>
-        </label>
-        ),
+      { 
+        header: 'Статус', 
+        accessorKey: 'status',
         cell: ({ row }) => (
-        <label 
-        className={styles.ch_lb}
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault(); 
-          row.getToggleSelectedHandler()(e);
-        }}
-
-        >
-          <input
-            type="checkbox"
-            className={styles.ch_in}
-            {...{
-              checked: row.getIsSelected(),
-              disabled: !row.getCanSelect(),
-              onChange: row.getToggleSelectedHandler(),
-              onClick: e => e.stopPropagation(), 
-            }}
-          />
-          <span className={styles.ch_sp}></span>
-        </label>
-
+          <span className={
+            row.original.inventory_previous === null 
+              ? styles.statusCreate 
+              : styles.statusUpdate
+          }>
+            {row.original.inventory_previous === null ? 'CREATE' : 'UPDATE'}
+          </span>
         ),
+        enableSorting: true,
       },
       { 
         header: 'Полное название', 
         accessorKey: 'fullname',
-        cell: ({ row }) => <span>{row.original.fullname}</span>,
-        enableSorting: true,  // Включаем сортировку для столбца
+        cell: ({ row }) => row.original.inventory_current.fullname,
+        enableSorting: true,
       },
       { 
         header: 'Инв. номер', 
         accessorKey: 'serial_number',
+        cell: ({ row }) => row.original.inventory_current.serial_number,
         enableSorting: true,
       },
       {
         header: 'Состояние',
         accessorKey: 'status_doc',
+        cell: ({ row }) => formatCell(row, 'status_doc'),
         enableSorting: true,
       },
       {
         header: 'Ответственный',
         accessorKey: 'current_responsible',
-        cell: ({ row }) => <span>{formatName(row.original.current_responsible)}</span>,
+        cell: ({ row }) => formatCell(row, 'current_responsible', formatName),
         enableSorting: true,
       },
       {
-        header: 'Дата приянтия к учёту',
-        accessorKey: 'according_data',
+        header: 'Команата',
+        accessorKey: 'room_doc',
+        cell: ({ row }) => formatCell(row, 'room_doc'),
         enableSorting: true,
       },
-      // {
-      //   header: 'Балансовая стоимость',
-      //   accessorKey: 'balans_price',
-      //   enableSorting: true,  // Включаем сортировку для столбца
-      // },
+      {
+        header: 'Балансовая стоимость',
+        accessorKey: 'balans_price',
+        cell: ({ row }) => formatCell(row, 'balans_price'),
+        enableSorting: true,
+      },
     ],
     []
   );
 };
 
-  export default ImportColumns
+export default ImportColumns;

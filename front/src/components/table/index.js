@@ -58,7 +58,7 @@ const Table = ({ data, columns, className, globalFilter, setGlobalFilter, clickT
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              onClick={() => clickTr?.(row.original.id)}
+              onClick={() => clickTr?.(row.original)}
               style={{ cursor: clickTr ? 'pointer' : 'default' }}
             >
               {row.getVisibleCells().map((cell) => (

@@ -61,3 +61,26 @@ input:checked{
     border: 0;
   }
 }
+
+.statusCreate {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.statusUpdate {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.oldValue {
+  color: #dc3545;
+  text-decoration: line-through;
+  /* font-size: 12px; */
+  /* opacity: 0.7; */
+}
+
+.newValue {
+  color: #28a745;
+  /* font-weight: bold; */
+  /* font-size: 14px; */
+}
