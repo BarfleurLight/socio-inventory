@@ -18,7 +18,12 @@ class Responsible(models.Model):
 
     def __str__(self) -> str:
         return self.surname
-
+    
+    def get_full_name(self):
+        parts = [self.surname, self.name]
+        if self.patronymic:
+            parts.append(self.patronymic)
+        return ' '.join(parts)
 
 class IP(models.Model):
     ip = models.GenericIPAddressField(
@@ -84,7 +89,7 @@ class MAC(models.Model):
     )
     ip_addresses = models.ManyToManyField(
         'IP',
-        related_name='ip_address',
+        related_name='mac_address',
         blank=True,
         verbose_name="IP-адреса"
     )

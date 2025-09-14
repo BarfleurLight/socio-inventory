@@ -1,6 +1,7 @@
 from rest_framework import viewsets
-from inventory.models import Models, Consumables
-from .serializers import ModelSerializer, ConsumablesSerializer
+from inventory.models import Models, Consumables, Inventory
+from .serializers import (ModelSerializer, ConsumablesSerializer,
+                          InventoryListSerializer, InventoryWriteSerializer)
 
 
 class ModelViewSet(viewsets.ReadOnlyModelViewSet):
@@ -11,3 +12,12 @@ class ModelViewSet(viewsets.ReadOnlyModelViewSet):
 class ConsumablesViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Consumables.objects.all()
     serializer_class = ConsumablesSerializer
+
+
+class InventoryViewSet(viewsets.ModelViewSet):
+    queryset = Inventory.objects.all()
+    
+    def get_serializer_class(self):
+        if self.action in ('list', 'retrieve'):
+            return InventoryListSerializer
+        return InventoryWriteSerializer

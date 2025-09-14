@@ -1,6 +1,6 @@
 import base64
 from rest_framework import serializers
-from inventory.models import Models, Consumables
+from inventory.models import Models, Consumables, Inventory, IP
 
 
 class ModelSerializer(serializers.ModelSerializer):
@@ -18,3 +18,37 @@ class ConsumablesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumables
         fields = ['id', 'image', 'name', 'cons_type', 'models', 'count']
+
+class InventoryWriteSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Inventory
+        fields = ['id']
+
+
+class InventoryListSerializer(serializers.ModelSerializer):
+    model = ModelSerializer()
+    current_responsible = serializers.CharField(
+        source='current_responsible.get_full_name', 
+        read_only=True
+    )
+    ip = serializers.SerializerMethodField()
+    mac = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Inventory
+        fields = (
+            'id', 'full_name', 'model', 'serial_number', 
+            'current_responsible', 'mac', 'ip', 'status_real', 'status_doc', 
+            'room_real', 'room_doc', 'balance_price',
+        )
+
+    def get_ip(self, obj):
+        return list(
+            IP.objects.filter(
+                mac_address__inventory=obj
+            ).values_list('ip', flat=True).distinct()
+        )
+
+    def get_mac(self, obj):
+        return list(obj.mac_address.values_list('mac', flat=True))
