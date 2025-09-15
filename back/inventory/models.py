@@ -68,7 +68,9 @@ class MAC(models.Model):
         'Inventory',
         on_delete=models.CASCADE,
         related_name='mac_address',
-        verbose_name='Инвентарь'
+        verbose_name='Инвентарь',
+        blank=True,
+        null=True
     )
     mac = models.CharField(
         max_length=17,
@@ -200,7 +202,7 @@ class InventoryAttribute(models.Model):
 
 
 class Inventory(models.Model):
-    ACTIVE = 'computer'
+    ACTIVE = 'active'
     TO_WRITTEN = 'to_written_off'
     WRITTEN_OFF = 'written_off'
     
@@ -252,7 +254,9 @@ class Inventory(models.Model):
         max_digits=12,
         decimal_places=2,
         validators=[MinValueValidator(0)],
-        verbose_name="Балансовая стоимость"
+        verbose_name="Балансовая стоимость",
+        blank=True,
+        null=True
     )
     room_real = models.PositiveIntegerField(
         validators=[
