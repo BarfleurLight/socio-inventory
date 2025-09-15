@@ -13,17 +13,25 @@ class ModelSerializer(serializers.ModelSerializer):
     def get_count(self, obj):
         return obj.inventory_items.count()
 
+
 class ConsumablesSerializer(serializers.ModelSerializer):
     models = ModelSerializer(many=True)
     class Meta:
         model = Consumables
         fields = ['id', 'image', 'name', 'cons_type', 'models', 'count']
 
+
 class InventoryWriteSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Inventory
-        fields = ['id']
+        fields = [
+            'full_name',
+            'current_responsible',
+            'serial_number',
+            'status_doc',
+            'balance_price',
+            'room_doc',
+        ]
 
 
 class InventoryListSerializer(serializers.ModelSerializer):
