@@ -1,6 +1,6 @@
 import base64
 from rest_framework import serializers
-from inventory.models import Models, Consumables, Inventory, IP
+from inventory.models import Models, Consumables, Inventory, IP, Responsible
 
 
 class ModelSerializer(serializers.ModelSerializer):
@@ -19,6 +19,25 @@ class ConsumablesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumables
         fields = ['id', 'image', 'name', 'cons_type', 'models', 'count']
+
+
+class InventoryImportWriteSerializer(serializers.ModelSerializer):
+    current_responsible = serializers.PrimaryKeyRelatedField(
+        queryset=Responsible.objects.all(),
+        allow_null=True,
+        required=False
+    )
+    
+    class Meta:
+        model = Inventory
+        fields = [
+            'full_name',
+            'current_responsible',
+            'serial_number',
+            'status_doc',
+            'balance_price',
+            'room_doc',
+        ]
 
 
 class InventoryWriteSerializer(serializers.ModelSerializer):
