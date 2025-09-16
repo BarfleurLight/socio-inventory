@@ -15,15 +15,22 @@ class Responsible(models.Model):
     class Meta:
         verbose_name = 'Ответственный'
         verbose_name_plural = 'Ответственные'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['surname', 'name', 'patronymic'],
+                name='unique_responsible'
+            )
+        ]
 
     def __str__(self) -> str:
-        return self.surname
+        return self.get_full_name()
     
     def get_full_name(self):
         parts = [self.surname, self.name]
         if self.patronymic:
             parts.append(self.patronymic)
         return ' '.join(parts)
+
 
 class IP(models.Model):
     ip = models.GenericIPAddressField(
@@ -216,8 +223,11 @@ class Inventory(models.Model):
     model = models.ForeignKey(
         'Models',
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
         related_name='inventory_items',
         verbose_name="Модель оборудования"
+        
     )
     current_responsible = models.ForeignKey(
         'Responsible',
