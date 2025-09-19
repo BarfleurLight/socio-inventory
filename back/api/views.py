@@ -2,6 +2,7 @@ from rest_framework import (viewsets, response, status,
                             views, parsers, exceptions)
 from inventory.models import Models, Consumables, Inventory, Responsible
 from .pagination import CustomPaginations
+from .permissions import IsAdminOrAccountant
 from .utils import process_csv_file
 from .serializers import (ModelSerializer, ConsumablesSerializer,
                           InventoryListSerializer, InventoryWriteSerializer,
@@ -31,6 +32,8 @@ class InventoryViewSet(viewsets.ModelViewSet):
 
 class ImportAPIView(views.APIView):
     parser_classes = [parsers.MultiPartParser]
+    permission_classes = (IsAdminOrAccountant,)
+
     def post(self, request):
         csv_data = process_csv_file(request)
 

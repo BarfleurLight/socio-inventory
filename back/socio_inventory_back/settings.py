@@ -101,7 +101,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'api.permissions.IsAdminUserOrReadOnly',
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -117,7 +117,7 @@ SIMPLE_JWT = {
 DJOSER = {
     'HIDE_USERS': False,
     'PERMISSIONS': {
-        'user': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
+        'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
         'user_list': ['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
     },
     'SERIALIZERS': {
