@@ -1,6 +1,24 @@
 import base64
 from rest_framework import serializers
+from django.core.files.base import ContentFile
 from inventory.models import Models, Consumables, Inventory, IP, Responsible
+
+
+class Base64ImageField(serializers.ImageField):
+    def to_internal_value(self, data):
+        if isinstance(data, str) and data.startswith('data:image'):
+            format, imgstr = data.split(';base64,')
+            ext = format.split('/')[-1]
+
+            data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+
+        return super().to_internal_value(data)
+
+
+class ModelShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Models
+        fields = ['id', 'name']
 
 
 class ModelSerializer(serializers.ModelSerializer):
@@ -15,10 +33,12 @@ class ModelSerializer(serializers.ModelSerializer):
 
 
 class ConsumablesSerializer(serializers.ModelSerializer):
-    models = ModelSerializer(many=True)
+    models = ModelShortSerializer(many=True, read_only=True)
+    image = Base64ImageField(required=False, allow_null=True)
+
     class Meta:
         model = Consumables
-        fields = ['id', 'image', 'name', 'cons_type', 'models', 'count']
+        fields = ['id', 'image', 'name', 'cons_type', 'count','models']
 
 
 class InventoryImportWriteSerializer(serializers.ModelSerializer):

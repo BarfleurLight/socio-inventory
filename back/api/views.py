@@ -14,8 +14,8 @@ class ModelViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ModelSerializer
 
 
-class ConsumablesViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Consumables.objects.all()
+class ConsumablesViewSet(viewsets.ModelViewSet):
+    queryset = Consumables.objects.all().prefetch_related('models')
     pagination_class = CustomPaginations
     serializer_class = ConsumablesSerializer
 
