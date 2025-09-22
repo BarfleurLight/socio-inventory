@@ -1,12 +1,32 @@
 from rest_framework import (viewsets, response, status,
                             views, parsers, exceptions)
-from inventory.models import Models, Consumables, Inventory, Responsible
+from inventory.models import (
+    Models, Consumables, Inventory, Responsible, IP, MAC
+)
 from .pagination import CustomPaginations
 from .permissions import IsAdminOrAccountant
 from .utils import process_csv_file
-from .serializers import (ModelSerializer, ConsumablesSerializer,
-                          InventoryListSerializer, InventoryWriteSerializer,
-                          InventoryImportWriteSerializer)
+from .serializers import (
+    ModelListSerializer, ModelDetailSerializer, ConsumablesListSerializer,
+    InventoryListSerializer, InventoryDetailSerializer, ResponsibleSerializer,
+    InventoryImportWriteSerializer, ConsumableDetailSerializer, IPSerializer,
+    MACSerializer
+)
+
+
+class ResponsibleViewSet(viewsets.ModelViewSet):
+    queryset = Responsible.objects.all()
+    serializer_class = ResponsibleSerializer
+
+
+class IPViewSet(viewsets.ModelViewSet):
+    queryset = IP.objects.all()
+    serializer_class = IPSerializer
+
+
+class MACViewSet(viewsets.ModelViewSet):
+    queryset = MAC.objects.all()
+    serializer_class = MACSerializer
 
 
 class ModelViewSet(viewsets.ReadOnlyModelViewSet):

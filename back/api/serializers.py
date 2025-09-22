@@ -1,7 +1,9 @@
 import base64
 from rest_framework import serializers
 from django.core.files.base import ContentFile
-from inventory.models import Models, Consumables, Inventory, IP, Responsible
+from inventory.models import (
+    Models, Consumables, Inventory, IP, Responsible, MAC, InventoryAttribute
+)
 
 
 class Base64ImageField(serializers.ImageField):
@@ -13,6 +15,17 @@ class Base64ImageField(serializers.ImageField):
             data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
 
         return super().to_internal_value(data)
+
+class ResponsibleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Responsible
+        fields = ('id', 'surname', 'name', 'patronymic')
+
+
+class IPSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IP
+        fields = ('id', 'ip')
 
 
 class ModelShortSerializer(serializers.ModelSerializer):
