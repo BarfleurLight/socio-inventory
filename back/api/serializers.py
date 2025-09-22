@@ -31,59 +31,112 @@ class IPSerializer(serializers.ModelSerializer):
 class ModelShortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Models
-        fields = ['id', 'name']
+        fields = ('id', 'name')
 
 
-class ModelSerializer(serializers.ModelSerializer):
+class ConsumablesShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Consumables
+        fields = ('id', 'name', 'cons_type', 'count')
+
+
+class InventoryShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inventory
+        fields = (
+            'id', 'image', 'full_name', 'serial_number',
+            'room_doc', 'room_real', 'status_doc'
+        )
+
+class ModelListSerializer(serializers.ModelSerializer):
     count = serializers.SerializerMethodField()
     
     class Meta:
         model = Models
-        fields = ['id', 'image', 'name', 'model_type', 'count']
+        fields = ('id', 'image', 'name', 'model_type', 'count')
     
     def get_count(self, obj):
         return obj.inventory_items.count()
 
 
-class ConsumablesSerializer(serializers.ModelSerializer):
+class ConsumablesListSerializer(serializers.ModelSerializer):
     models = ModelShortSerializer(many=True, read_only=True)
-    image = Base64ImageField(required=False, allow_null=True)
 
     class Meta:
         model = Consumables
-        fields = ['id', 'image', 'name', 'cons_type', 'count','models']
+        fields = ('id', 'image', 'name', 'cons_type', 'count','models')
 
 
-class InventoryImportWriteSerializer(serializers.ModelSerializer):
-    current_responsible = serializers.PrimaryKeyRelatedField(
-        queryset=Responsible.objects.all(),
-        allow_null=True,
-        required=False
+class BasePrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
+    def get_choices(self, cutoff=None):
+        queryset = self.get_queryset()
+        return {item.id: str(item) for item in queryset}
+
+
+class ConsumablesPrimaryKeyRelatedField(BasePrimaryKeyRelatedField):
+    def to_representation(self, value):
+        return ConsumablesShortSerializer(value, context=self.context).data
+    
+
+class ModelPrimaryKeyRelatedField(BasePrimaryKeyRelatedField):
+    def to_representation(self, value):
+        # print(value)
+        # return 'test'
+        return ModelListSerializer(value, context=self.context).data
+    
+
+class InventoryPrimaryKeyRelatedField(BasePrimaryKeyRelatedField):
+    def to_representation(self, value):
+        return InventoryShortSerializer(value, context=self.context).data
+
+
+class IpPrimaryKeyRelatedField(BasePrimaryKeyRelatedField):
+    def to_representation(self, value):
+        return IPSerializer(value, context=self.context).data
+    
+
+class MACSerializer(serializers.ModelSerializer):
+    ip_addresses = IpPrimaryKeyRelatedField(
+        queryset=IP.objects.all(),
+        many=True
+    )
+    inventory = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = MAC
+        fields = ('id', 'mac', 'interface', 'ip_addresses', 'inventory')
+
+
+class ModelDetailSerializer(serializers.ModelSerializer):
+    image = Base64ImageField(required=False, allow_null=True)
+    consumables = ConsumablesPrimaryKeyRelatedField(
+        queryset=Consumables.objects.all(),
+        many=True,
+    )
+    inventory = InventoryPrimaryKeyRelatedField(
+        queryset=Inventory.objects.all(),
+        many=True,
+        source='inventory_items'
     )
     
     class Meta:
-        model = Inventory
-        fields = [
-            'full_name',
-            'current_responsible',
-            'serial_number',
-            'status_doc',
-            'balance_price',
-            'room_doc',
-        ]
+        model = Models
+        fields = (
+            'id', 'image', 'name',
+            'model_type','consumables', 'inventory'
+        )
 
 
-class InventoryWriteSerializer(serializers.ModelSerializer):
+class ConsumableDetailSerializer(serializers.ModelSerializer):
+    image = Base64ImageField(required=False, allow_null=True)
+    models = ModelPrimaryKeyRelatedField(
+        queryset=Models.objects.all(),
+        many=True,
+    )
+
     class Meta:
-        model = Inventory
-        fields = [
-            'full_name',
-            'current_responsible',
-            'serial_number',
-            'status_doc',
-            'balance_price',
-            'room_doc',
-        ]
+        model = Consumables
+        fields = ('id', 'image', 'name', 'cons_type', 'count', 'models')
 
 
 class InventoryListSerializer(serializers.ModelSerializer):

@@ -31,13 +31,21 @@ class MACViewSet(viewsets.ModelViewSet):
 
 class ModelViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Models.objects.all()
-    serializer_class = ModelSerializer
+
+    def get_serializer_class(self):
+        if self.action in ('list',):
+            return ModelListSerializer
+        return ModelDetailSerializer
 
 
 class ConsumablesViewSet(viewsets.ModelViewSet):
     queryset = Consumables.objects.all().prefetch_related('models')
     pagination_class = CustomPaginations
-    serializer_class = ConsumablesSerializer
+
+    def get_serializer_class(self):
+        if self.action in ('list',):
+            return ConsumablesListSerializer
+        return ConsumableDetailSerializer
 
 
 class InventoryViewSet(viewsets.ModelViewSet):
