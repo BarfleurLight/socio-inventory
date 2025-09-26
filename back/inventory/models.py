@@ -137,6 +137,7 @@ class Models(models.Model):
     )
     image = models.ImageField(
         upload_to='models/',
+        verbose_name="Изображение",
         blank=True,
         null=True
     )
@@ -225,16 +226,15 @@ class Inventory(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name='inventory_items',
+        related_name='inventory',
         verbose_name="Модель оборудования"
-        
     )
     current_responsible = models.ForeignKey(
         'Responsible',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='inventory_items',
+        related_name='inventory',
         verbose_name="Ответственный"
     )
     serial_number = models.CharField(
@@ -292,7 +292,7 @@ class Inventory(models.Model):
         Attribute,
         through='InventoryAttribute',
         through_fields=('inventory', 'attribute'),
-        related_name='inventory_items',
+        related_name='inventory',
         verbose_name="Дополнительные атрибуты",
         blank=True
     )
