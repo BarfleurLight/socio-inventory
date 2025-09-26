@@ -1,8 +1,10 @@
 import base64
 from rest_framework import serializers
 from django.core.files.base import ContentFile
+from django.db import transaction
 from inventory.models import (
-    Models, Consumables, Inventory, IP, Responsible, MAC, InventoryAttribute
+    Models, Consumables, Inventory, IP, Responsible, MAC, InventoryAttribute,
+    Attribute
 )
 
 
@@ -19,7 +21,7 @@ class Base64ImageField(serializers.ImageField):
 class ResponsibleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Responsible
-        fields = ('id', 'surname', 'name', 'patronymic')
+        fields = ('id', 'surname', 'name', 'patronymic', 'get_full_name')
 
 
 class IPSerializer(serializers.ModelSerializer):
@@ -56,7 +58,7 @@ class ModelListSerializer(serializers.ModelSerializer):
         fields = ('id', 'image', 'name', 'model_type', 'count')
     
     def get_count(self, obj):
-        return obj.inventory_items.count()
+        return obj.inventory.count()
 
 
 class ConsumablesListSerializer(serializers.ModelSerializer):
@@ -65,6 +67,27 @@ class ConsumablesListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumables
         fields = ('id', 'image', 'name', 'cons_type', 'count','models')
+
+
+class InventoryAttributeSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField(source='attribute.id')
+    attribute_name = serializers.ReadOnlyField(source='attribute.name')
+    attribute_description = serializers.ReadOnlyField(
+        source='attribute.description'
+    )
+    
+    class Meta:
+        model = InventoryAttribute
+        fields = ('id', 'attribute_name', 'attribute_description', 'value')
+
+
+class InventoryAttributeWriteSerializer(serializers.ModelSerializer):
+    id = serializers.PrimaryKeyRelatedField(queryset=Inventory.objects.all())
+    value = serializers.CharField()
+    
+    class Meta:
+        model = InventoryAttribute
+        fields = ('id', 'value')
 
 
 class BasePrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
@@ -80,8 +103,6 @@ class ConsumablesPrimaryKeyRelatedField(BasePrimaryKeyRelatedField):
 
 class ModelPrimaryKeyRelatedField(BasePrimaryKeyRelatedField):
     def to_representation(self, value):
-        # print(value)
-        # return 'test'
         return ModelListSerializer(value, context=self.context).data
     
 
@@ -95,12 +116,34 @@ class IpPrimaryKeyRelatedField(BasePrimaryKeyRelatedField):
         return IPSerializer(value, context=self.context).data
     
 
+class InventoryRelatedField(serializers.RelatedField):
+    def get_choices(self, cutoff=None):
+        queryset = self.get_queryset()
+        return {item.pk: str(item) for item in queryset}
+    
+    def to_representation(self, value):
+        return InventoryShortSerializer(value, context=self.context).data
+
+    def to_internal_value(self, data):
+        queryset = self.get_queryset()
+        model = queryset.model
+
+        try:
+            return queryset.get(pk=data)
+        except (TypeError, ValueError):
+            raise serializers.ValidationError(f"ID must be a valid {model.__name__} pk")
+        except model.DoesNotExist:
+            raise serializers.ValidationError(f"Invalid {model.__name__} id")
+
+
 class MACSerializer(serializers.ModelSerializer):
     ip_addresses = IpPrimaryKeyRelatedField(
         queryset=IP.objects.all(),
         many=True
     )
-    inventory = serializers.StringRelatedField(read_only=True)
+    inventory = InventoryRelatedField(
+        queryset=Inventory.objects.all(),
+    )
 
     class Meta:
         model = MAC
@@ -115,15 +158,14 @@ class ModelDetailSerializer(serializers.ModelSerializer):
     )
     inventory = InventoryPrimaryKeyRelatedField(
         queryset=Inventory.objects.all(),
-        many=True,
-        source='inventory_items'
+        many=True
     )
-    
+
     class Meta:
         model = Models
         fields = (
             'id', 'image', 'name',
-            'model_type','consumables', 'inventory'
+            'model_type','consumables','inventory'
         )
 
 
@@ -140,18 +182,15 @@ class ConsumableDetailSerializer(serializers.ModelSerializer):
 
 
 class InventoryListSerializer(serializers.ModelSerializer):
-    model = ModelSerializer()
-    current_responsible = serializers.CharField(
-        source='current_responsible.get_full_name', 
-        read_only=True
-    )
+    model = ModelListSerializer()
+    current_responsible = serializers.StringRelatedField(read_only=True)
     ip = serializers.SerializerMethodField()
     mac = serializers.SerializerMethodField()
     
     class Meta:
         model = Inventory
         fields = (
-            'id', 'full_name', 'model', 'serial_number', 
+            'id', 'image', 'full_name', 'model', 'serial_number', 
             'current_responsible', 'mac', 'ip', 'status_real', 'status_doc', 
             'room_real', 'room_doc', 'balance_price',
         )
@@ -165,3 +204,78 @@ class InventoryListSerializer(serializers.ModelSerializer):
 
     def get_mac(self, obj):
         return list(obj.mac_address.values_list('mac', flat=True))
+
+
+class InventoryDetailSerializer(InventoryListSerializer):
+    attributes = InventoryAttributeSerializer(
+        source='inventory_attributes', 
+        many=True, 
+        read_only=True
+    )
+    consumables = ConsumablesShortSerializer(
+        source='model.consumables',
+        many=True
+    )
+    
+    class Meta(InventoryListSerializer.Meta):
+        fields = InventoryListSerializer.Meta.fields + (
+            'attributes', 'consumables'
+        )
+
+
+class InventoryWriteSerializer(serializers.ModelSerializer):
+    image = Base64ImageField(required=False, allow_null=True)
+    mac = serializers.PrimaryKeyRelatedField(
+        queryset=MAC.objects.all(),
+        source='mac_address',
+        many=True,
+        required=False,
+    )
+    attributes = InventoryAttributeWriteSerializer(
+        required=False,
+        many=True,
+    )
+
+    def to_representation(self, value):
+        return InventoryDetailSerializer(value, context=self.context).data
+
+    def _add_attributes(self, inventory, attributes):
+        attributes_list = list()
+        for attribut in attributes:
+            current_attribut = Attribute.objects.get(
+                id=attribut.get("id").id
+            )
+            attributes_list.append(
+                InventoryAttribute(
+                    inventory=inventory,
+                    attribute=current_attribut,
+                    value=str(attribut.get("value"))
+                )
+            )
+        InventoryAttribute.objects.bulk_create(attributes_list)
+
+    @transaction.atomic
+    def create(self, validated_data):
+        if not validated_data.get('attributes', None):
+            return Inventory.objects.create(**validated_data)
+        attributes = validated_data.pop('attributes')
+        inventory = Inventory.objects.create(**validated_data)
+        self._add_attributes(inventory, attributes)
+        return inventory
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        if not validated_data.get('attributes', None):
+            return super().update(instance, validated_data)
+        attributes = validated_data.pop('attributes')
+        InventoryAttribute.objects.filter(inventory=instance).delete()
+        self._add_attributes(instance, attributes)
+        return super().update(instance, validated_data)
+
+    class Meta:
+        model = Inventory
+        fields = (
+            'full_name', 'serial_number', 'image', 'model', 
+            'current_responsible', 'status_real', 'status_doc', 
+            'room_real', 'room_doc', 'balance_price', 'mac', 'attributes'
+        )

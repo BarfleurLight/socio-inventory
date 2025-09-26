@@ -72,7 +72,7 @@ class ModelsAdmin(admin.ModelAdmin):
     get_html_image.short_description = "Изображение"
     
     def inventory_count(self, obj):
-        return obj.inventory_items.count()
+        return obj.inventory.count()
     inventory_count.short_description = "Кол-во оборудования"
 
 

@@ -9,7 +9,7 @@ from .utils import process_csv_file
 from .serializers import (
     ModelListSerializer, ModelDetailSerializer, ConsumablesListSerializer,
     InventoryListSerializer, InventoryDetailSerializer, ResponsibleSerializer,
-    InventoryImportWriteSerializer, ConsumableDetailSerializer, IPSerializer,
+    InventoryWriteSerializer, ConsumableDetailSerializer, IPSerializer,
     MACSerializer
 )
 
@@ -25,11 +25,11 @@ class IPViewSet(viewsets.ModelViewSet):
 
 
 class MACViewSet(viewsets.ModelViewSet):
-    queryset = MAC.objects.all()
+    queryset = MAC.objects.select_related('inventory').all()
     serializer_class = MACSerializer
 
 
-class ModelViewSet(viewsets.ReadOnlyModelViewSet):
+class ModelViewSet(viewsets.ModelViewSet):
     queryset = Models.objects.all()
 
     def get_serializer_class(self):
@@ -46,15 +46,17 @@ class ConsumablesViewSet(viewsets.ModelViewSet):
         if self.action in ('list',):
             return ConsumablesListSerializer
         return ConsumableDetailSerializer
-
+    
 
 class InventoryViewSet(viewsets.ModelViewSet):
-    queryset = Inventory.objects.all()
+    queryset = Inventory.objects.select_related('model')
     pagination_class = CustomPaginations
     
     def get_serializer_class(self):
-        if self.action in ('list', 'retrieve'):
+        if self.action in ('list',):
             return InventoryListSerializer
+        elif self.action in ('retrieve',):
+            return InventoryDetailSerializer
         return InventoryWriteSerializer
 
 
@@ -81,7 +83,7 @@ class ImportAPIView(views.APIView):
                         ).first()
                 previous_data = self._get_inventory_data(inventory)
 
-                serializer = InventoryImportWriteSerializer(
+                serializer = InventoryWriteSerializer(
                     data=row, 
                     instance=inventory
                 )
