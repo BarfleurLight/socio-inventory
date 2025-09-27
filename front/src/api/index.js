@@ -1,4 +1,3 @@
-import importList from './mock-objects/import'
 import inventoryList from './mock-objects/inventory'
 
 
@@ -23,10 +22,16 @@ class Api {
   }
 
   // Список всего оборудования
-  getInventoryList ( ) {
-    const mockResponse = inventoryList
-    
-    return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
+  getInventoryList ( {
+    page = 1,
+    limit = 20,
+  } = {})  {
+    return fetch(`/api/v1/inventory/?page=${page}&limit=${limit}`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+      }
+    }).then(this.checkResponse)
   }
 
   // Конкретное оборудование
@@ -34,14 +39,17 @@ class Api {
 
     const inventory = inventoryList.find(item => item.serial_number === serial_number) || {};
     const mockResponse = inventory
-
     
     return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
   }
 
   // Модели
-  getModels() {
-    return fetch(`/api/v1/models/`, {
+  getModels ( {
+    page = 1,
+    limit = 9,
+  } = {}) {
+
+    return fetch(`/api/v1/models/?page=${page}&limit=${limit}`, {
       method: 'GET',
       headers: {
         ...this._headers,
@@ -50,28 +58,17 @@ class Api {
   }
 
   // Расходники  
-  getConsumables ( ) {
-    return fetch(`/api/v1/consumables/`, {
+  getConsumables ( {
+    page = 1,
+    limit = 20,
+  } = {}) {
+
+    return fetch(`/api/v1/consumables/?page=${page}&limit=${limit}`, {
       method: 'GET',
       headers: {
         ...this._headers,
       }
     }).then(this.checkResponse)
-  }
-
-  //Ипорты
-  getImports ( ) {
-    const mockResponse = importList
-
-    return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
-  }
-
-  //Ипорт
-  getImport ({id}) {
-    const currentImport = importList.find(item => item.id === id) || {};
-    const mockResponse = currentImport
-    
-    return Promise.resolve({ results: mockResponse }).then(this.checkResponse);
   }
 
   //загрузка файла
