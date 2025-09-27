@@ -139,10 +139,12 @@ class InventoryRelatedField(serializers.RelatedField):
 class MACSerializer(serializers.ModelSerializer):
     ip_addresses = IpPrimaryKeyRelatedField(
         queryset=IP.objects.all(),
+        required=False,
         many=True
     )
     inventory = InventoryRelatedField(
         queryset=Inventory.objects.all(),
+        required=False,
     )
 
     class Meta:
@@ -154,10 +156,12 @@ class ModelDetailSerializer(serializers.ModelSerializer):
     image = Base64ImageField(required=False, allow_null=True)
     consumables = ConsumablesPrimaryKeyRelatedField(
         queryset=Consumables.objects.all(),
+        required=False,
         many=True,
     )
     inventory = InventoryPrimaryKeyRelatedField(
         queryset=Inventory.objects.all(),
+        required=False,
         many=True
     )
 
@@ -173,6 +177,7 @@ class ConsumableDetailSerializer(serializers.ModelSerializer):
     image = Base64ImageField(required=False, allow_null=True)
     models = ModelPrimaryKeyRelatedField(
         queryset=Models.objects.all(),
+        required=False,
         many=True,
     )
 
@@ -214,6 +219,8 @@ class InventoryDetailSerializer(InventoryListSerializer):
     )
     consumables = ConsumablesShortSerializer(
         source='model.consumables',
+        required=False,
+        read_only=True,
         many=True
     )
     
