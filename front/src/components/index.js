@@ -12,6 +12,7 @@ import Table from './table'
 import ImportNewCard from './import-new-card'
 import ImportOldCard from './import-old-card'
 import FileInput from './file-input'
+import Pagination from './pagination'
 
 
 export {
@@ -28,5 +29,6 @@ export {
   Img,
   ImportNewCard,
   ImportOldCard,
-  FileInput
+  FileInput,
+  Pagination
 }

@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import { Container, Main, Table } from '../../components'
+import { Container, Main, Table, Pagination } from '../../components'
 import { useConsumables } from '../../utils/index.js'
 import { useEffect, useState } from 'react'
 import api from '../../api'
@@ -10,19 +10,25 @@ const Consumables = () => {
   const {
     consumables,
     setConsumables,
+    consumablesPage,
+    setConsumablesPage,
+    consumablesCount,
+    setConsumablesCount,
     navigate
   } = useConsumables()
 
-  const getConsumables = () => {
-    api.getConsumables()
+  const getConsumables = ({ page = 1 , limit = 20}) => {
+    api.getConsumables({ page, limit })
       .then(res => {
-        setConsumables(res);
+        const { results, count } = res
+        setConsumables(results)
+        setConsumablesCount(count)
       });
   }
 
   useEffect(_ => {
-    getConsumables()
-  }, [])
+    getConsumables({ page: consumablesPage})
+  }, [consumablesPage])
   
   const columns = ConsumablesColumns();
   const [globalFilter, setGlobalFilter] = useState('');
@@ -44,7 +50,14 @@ const Consumables = () => {
           setGlobalFilter={setGlobalFilter}
           clickTr={(item) => (navigate(`/consumables/${item.id}`))}
       />
+      <Pagination
+        count={consumablesCount}
+        limit={20}
+        page={consumablesPage}
+        onPageChange={page => setConsumablesPage(page)}
+      />
     </Container>
+
   </Main>
 }
 
