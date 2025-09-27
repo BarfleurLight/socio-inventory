@@ -3,7 +3,7 @@ from rest_framework import (viewsets, response, status,
 from inventory.models import (
     Models, Consumables, Inventory, Responsible, IP, MAC
 )
-from .pagination import CustomPaginations
+from .pagination import CustomPaginations, CustomModelPaginations
 from .permissions import IsAdminOrAccountant
 from .utils import process_csv_file
 from .serializers import (
@@ -31,6 +31,7 @@ class MACViewSet(viewsets.ModelViewSet):
 
 class ModelViewSet(viewsets.ModelViewSet):
     queryset = Models.objects.all()
+    pagination_class = CustomModelPaginations
 
     def get_serializer_class(self):
         if self.action in ('list',):
