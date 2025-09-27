@@ -1,0 +1,41 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.paginationItem {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 20px;
+}
+
+.paginationItemActive {
+  color: #FFF;
+  background-color: #c9a456;
+  cursor: default;
+}
+
+.arrow {
+  cursor: pointer;
+  max-width: 16px;
+}
+
+.arrowLeft {
+  margin-right: 21px;
+}
+
+.arrowRight {
+  margin-left: 21px;
+}
+
+.arrowDisabled {
+  opacity: .3;
+  cursor: not-allowed;
+}

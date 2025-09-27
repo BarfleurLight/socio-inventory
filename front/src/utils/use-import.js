@@ -1,18 +1,16 @@
 import { useState } from "react";
-
+import { useNavigate } from 'react-router-dom';
 
 export default function useImport () {
-    const [ listImport, setImport ] = useState([])
-    const [ currentImport, setCurruntImport] = useState([])
-    const [ currentInventory, setCurruntInventory] = useState([])
-
+    const [updateList, setUpdateList] = useState([])
+    const [currentFile, setCurrentFile] = useState(null)
+    const navigate = useNavigate();
 
 return {
-    listImport,
-    setImport,
-    currentImport,
-    setCurruntImport,
-    currentInventory,
-    setCurruntInventory
+    updateList,
+    setUpdateList,
+    currentFile, 
+    setCurrentFile,
+    navigate
   }
 }

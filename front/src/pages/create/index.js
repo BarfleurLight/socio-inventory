@@ -16,7 +16,7 @@ const Create = () => {
   return <Main>
     <Container className={styles.main_form}>
        <div className={styles.body_form}>   
-          <lable className={styles.ch_lb}
+          <label className={styles.ch_lb}
                 onClick={(e) => {
                   handleCheckboxChange('inv');
                   }}> 
@@ -28,43 +28,45 @@ const Create = () => {
             />
             <span className={styles.ch_sp}></span>
             Оборудование
-          </lable>
-          <lable> 
+          </label>
+          <label> 
             <input
               type='checkbox' 
               checked={selectedOption === 'model'}
               onChange={() => handleCheckboxChange('model')}
             />
             Модель
-          </lable>
-          <lable> 
+          </label>
+          <label> 
             <input
               type='checkbox' 
               checked={selectedOption === 'cons'}
               onChange={() => handleCheckboxChange('cons')}
             />
             Расходник
-          </lable>
+          </label>
         {selectedOption === 'inv' && <p>test1</p>}
         {selectedOption === 'model' && <p>test2</p>}
         {selectedOption === 'cons' && <p>tes31</p>}
        </div>
        <table className={styles.test}>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+          </tbody>
        </table>
     </Container>
   </Main>

@@ -6,6 +6,9 @@ import { Img, LinkComponent } from '../../components';
 const InventoryColumns = () => {
 
   const formatName = (fullName) => {
+    if (!fullName) {
+      return '---';
+    }
     const parts = fullName.split(' ');
     if (parts.length === 3) {
       const [firstName, middleName, lastName] = parts;
@@ -29,11 +32,11 @@ const InventoryColumns = () => {
       },
       { 
         header: 'Полное название', 
-        accessorKey: 'fullname',
+        accessorKey: 'full_name',
         cell: ({ row }) => <div>
           <LinkComponent 
               href={`/inventory/${row.original.id}`}
-              title={row.original.fullname}
+              title={row.original.full_name}
             />
           <div 
             className={styles.ser_num}
@@ -46,8 +49,8 @@ const InventoryColumns = () => {
         header: 'Модель',
         accessorKey: 'model',
         cell: ({ row }) => <LinkComponent 
-              href={`/model/${row.original.model.id}`}
-              title={row.original.model.name}
+              href={`/model/${row.original?.model?.id ?? ''}`}
+              title={row.original?.model?.name ?? ''}
             />,
         enableSorting: true,
       },
@@ -55,13 +58,13 @@ const InventoryColumns = () => {
         header: 'Ip', 
         accessorKey: 'ip',
         enableSorting: true,
-        accessorFn: row => `${row.ip.join('\n')}`,
+        accessorFn: row => `${row.ip?.join('\n') || '---'}`,
       },
       {
         header: 'MAC', 
         accessorKey: 'mac',
         enableSorting: true,
-        accessorFn: row => `${row.mac.join('\n')}`,
+        accessorFn: row => `${row.mac?.join('\n') || '---'}`,
       },
       {
         header: 'Статус \n док./реал.',
@@ -78,7 +81,7 @@ const InventoryColumns = () => {
       {
         header: 'Комната \n док./реал.',
         accessorKey: 'room',
-        accessorFn: row => `${row.room_doc}${'\n'}${row.room_real}`,
+        accessorFn: row => `${row.room_doc ?? '---'}${'\n'}${row.room_real?? '---'}`,
         enableSorting: true,
       },
     ],

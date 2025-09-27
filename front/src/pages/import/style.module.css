@@ -54,12 +54,11 @@ header {
 
 .fullname {
     width: 300px;
-    display: flex;
-    justify-content: left;
-    text-align: left;
 }
 .serial_number {
     width: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 } 
 
 @media screen and (max-width: 950px) {
