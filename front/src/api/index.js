@@ -76,7 +76,7 @@ class Api {
     const formData = new FormData();
     formData.append('file', file);
     
-    return fetch(`/api/v1/import/inventory/`, {
+    return fetch(`/api/v1/import/`, {
       method: 'POST',
       body: formData,
     }).then(this.checkResponse);

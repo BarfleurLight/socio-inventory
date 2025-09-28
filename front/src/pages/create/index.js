@@ -15,59 +15,35 @@ const Create = () => {
 
   return <Main>
     <Container className={styles.main_form}>
-       <div className={styles.body_form}>   
-          <label className={styles.ch_lb}
-                onClick={(e) => {
-                  handleCheckboxChange('inv');
-                  }}> 
-            <input
-              type='checkbox' 
-              className={styles.ch_in}
-              checked={selectedOption === 'inv'}
-              onChange={() => handleCheckboxChange('inv')}
-            />
-            <span className={styles.ch_sp}></span>
-            Оборудование
-          </label>
-          <label> 
-            <input
-              type='checkbox' 
-              checked={selectedOption === 'model'}
-              onChange={() => handleCheckboxChange('model')}
-            />
-            Модель
-          </label>
-          <label> 
-            <input
-              type='checkbox' 
-              checked={selectedOption === 'cons'}
-              onChange={() => handleCheckboxChange('cons')}
-            />
-            Расходник
-          </label>
-        {selectedOption === 'inv' && <p>test1</p>}
-        {selectedOption === 'model' && <p>test2</p>}
-        {selectedOption === 'cons' && <p>tes31</p>}
+       <div className={styles.body_form}>
+        <label> 
+          <input
+            type='checkbox' 
+            checked={selectedOption === 'inv'}
+            onChange={() => handleCheckboxChange('inv')}
+          />
+          Оборудование
+        </label> 
+        <label> 
+          <input
+            type='checkbox' 
+            checked={selectedOption === 'model'}
+            onChange={() => handleCheckboxChange('model')}
+          />
+          Модель
+        </label>
+        <label> 
+          <input
+            type='checkbox' 
+            checked={selectedOption === 'cons'}
+            onChange={() => handleCheckboxChange('cons')}
+          />
+          Расходник
+        </label>
+        {selectedOption === 'inv' && <p>In development(Inventory Form)</p>}
+        {selectedOption === 'model' && <p>In development(Modesl Form)</p>}
+        {selectedOption === 'cons' && <p>In development(Consumable Form)</p>}
        </div>
-       <table className={styles.test}>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-          </tbody>
-       </table>
     </Container>
   </Main>
 }

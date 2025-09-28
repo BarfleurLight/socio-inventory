@@ -15,7 +15,7 @@ const Models = () => {
     setModelCount 
   } = useModels()
 
-  const getModels = ({ page = 1 , limit = 20}) => {
+  const getModels = ({ page = 1 , limit = 8}) => {
     api.getModels({ page, limit })
       .then(res => {
         const { results, count } = res
@@ -41,7 +41,7 @@ useEffect(_ => {
     </Container>
     <Pagination
         count={modelCount}
-        limit={20}
+        limit={8}
         page={modelPage}
         onPageChange={page => setModelPage(page)}
     />

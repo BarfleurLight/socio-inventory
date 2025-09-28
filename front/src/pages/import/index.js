@@ -21,7 +21,7 @@ const Import = () => {
   const handleFileUpload = (file) => {
     setCurrentFile(file)
     
-    api.getImports(file)
+    api.downloadFile(file)
       .then(response => {
         setUpdateList(response['results'])
       })
