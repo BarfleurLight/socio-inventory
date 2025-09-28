@@ -18,6 +18,7 @@ class Base64ImageField(serializers.ImageField):
 
         return super().to_internal_value(data)
 
+
 class ResponsibleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Responsible
@@ -28,6 +29,12 @@ class IPSerializer(serializers.ModelSerializer):
     class Meta:
         model = IP
         fields = ('id', 'ip')
+
+
+class AttributeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attribute
+        fields = ('id', 'name', 'description')
 
 
 class ModelShortSerializer(serializers.ModelSerializer):
@@ -49,6 +56,7 @@ class InventoryShortSerializer(serializers.ModelSerializer):
             'id', 'image', 'full_name', 'serial_number',
             'room_doc', 'room_real', 'status_doc'
         )
+
 
 class ModelListSerializer(serializers.ModelSerializer):
     count = serializers.SerializerMethodField()

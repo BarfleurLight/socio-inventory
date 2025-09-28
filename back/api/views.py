@@ -1,7 +1,7 @@
 from rest_framework import (viewsets, response, status,
                             views, parsers, exceptions)
 from inventory.models import (
-    Models, Consumables, Inventory, Responsible, IP, MAC
+    Models, Consumables, Inventory, Responsible, IP, MAC, Attribute
 )
 from .pagination import CustomPaginations, CustomModelPaginations
 from .permissions import IsAdminOrAccountant
@@ -10,7 +10,7 @@ from .serializers import (
     ModelListSerializer, ModelDetailSerializer, ConsumablesListSerializer,
     InventoryListSerializer, InventoryDetailSerializer, ResponsibleSerializer,
     InventoryWriteSerializer, ConsumableDetailSerializer, IPSerializer,
-    MACSerializer
+    MACSerializer, AttributeSerializer
 )
 
 
@@ -27,6 +27,11 @@ class IPViewSet(viewsets.ModelViewSet):
 class MACViewSet(viewsets.ModelViewSet):
     queryset = MAC.objects.select_related('inventory').all()
     serializer_class = MACSerializer
+
+
+class AttributeViewSet(viewsets.ModelViewSet):
+    queryset = Attribute.objects.all()
+    serializer_class = AttributeSerializer
 
 
 class ModelViewSet(viewsets.ModelViewSet):

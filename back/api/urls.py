@@ -1,10 +1,13 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from .views import (ModelViewSet, ConsumablesViewSet, InventoryViewSet,
-                    ImportAPIView, ResponsibleViewSet, IPViewSet, MACViewSet)
+                    ImportAPIView, ResponsibleViewSet, IPViewSet, MACViewSet,
+                    AttributeViewSet)
 from users.views import CustomUserViewSet
 
+
 router = DefaultRouter()
+router.register('attribute', AttributeViewSet, basename='attribute')
 router.register('models', ModelViewSet, basename='models')
 router.register('consumables', ConsumablesViewSet, basename='consumables')
 router.register('inventory', InventoryViewSet, basename='inventory')
