@@ -1,0 +1,2384 @@
+openapi: 3.0.3
+info:
+  title: Socio Инвентарь
+  version: ''
+paths:
+  /api/v1/attribute/:
+    get:
+      operationId: Список атрибутов
+      tags:
+      - Атрибуты
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attribute'
+          description: ''
+
+    post:
+      operationId: Создание атрибута
+      tags:
+      - Атрибуты
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+          description: ''
+  /api/v1/attribute/{id}/:
+    get:
+      operationId: Получение атрибута
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Атрибут.
+        required: true
+      tags:
+      - Атрибуты
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+          description: ''
+    put:
+      operationId: Обновление атрибута
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Атрибут.
+        required: true
+      tags:
+      - Атрибуты
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+          description: ''
+    patch:
+      operationId: Обновление атрибута
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Атрибут.
+        required: true
+      tags:
+      - Атрибуты
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAttribute'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAttribute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAttribute'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+          description: ''
+    delete:
+      operationId: Удаление атрибута
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Атрибут.
+        required: true
+      tags:
+      - Атрибуты
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/consumables/:
+    get:
+      operationId: Список расходников
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Расходники
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedConsumablesListList'
+          description: ''
+    post:
+      operationId: Добавить расходник
+      tags:
+      - Расходники
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumableDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConsumableDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConsumableDetail'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumableWrite'
+          description: ''
+  /api/v1/consumables/{id}/:
+    get:
+      operationId: Получение расходника
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Расходник.
+        required: true
+      tags:
+      - Расходники
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumableWrite'
+          description: ''
+    put:
+      operationId: Обновить расходник
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Расходник.
+        required: true
+      tags:
+      - Расходники
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumableDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConsumableDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConsumableDetail'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumableWrite'
+          description: ''
+    patch:
+      operationId: Честично обновить расходник
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Расходник.
+        required: true
+      tags:
+      - Расходники
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedConsumableDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedConsumableDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedConsumableDetail'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumableWrite'
+          description: ''
+    delete:
+      operationId: Удалить расходник
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Расходник.
+        required: true
+      tags:
+      - Расходники
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/import/:
+    post:
+      operationId: Импортировать файл
+      description: 'Импортировать СSV файл'
+      tags:
+      - Импорт
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/inventory/:
+    get:
+      operationId: Список оборудования
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Инвентарь
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInventoryListList'
+          description: ''
+    post:
+      operationId: Добавить оборудование
+      tags:
+      - Инвентарь
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryDetail'
+          description: ''
+  /api/v1/inventory/{id}/:
+    get:
+      operationId: Получить оборудование
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Инвентарь.
+        required: true
+      tags:
+      - Инвентарь
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryDetail'
+          description: ''
+    put:
+      operationId: Обновить оборудование
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Инвентарь.
+        required: true
+      tags:
+      - Инвентарь
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryDetail'
+          description: ''
+    patch:
+      operationId: Частичное обновление оборудования
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Инвентарь.
+        required: true
+      tags:
+      - Инвентарь
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InventoryWrite'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryDetail'
+          description: ''
+    delete:
+      operationId: Удалить оборудование
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Инвентарь.
+        required: true
+      tags:
+      - Инвентарь
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/ip/:
+    get:
+      operationId: Список IP адресов
+      tags:
+      - IP Адреса
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IP'
+          description: ''
+    post:
+      operationId: Добавить IP
+      tags:
+      - IP Адреса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IP'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IP'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IP'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IP'
+          description: ''
+  /api/v1/ip/{id}/:
+    get:
+      operationId: Получить IP
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   IPv4-адрес.
+        required: true
+      tags:
+      - IP Адреса
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IP'
+          description: ''
+    put:
+      operationId: Обновить IP
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   IPv4-адрес.
+        required: true
+      tags:
+      - IP Адреса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IP'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IP'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IP'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IP'
+          description: ''
+    patch:
+      operationId: Обновить IP
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   IPv4-адрес.
+        required: true
+      tags:
+      - IP Адреса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedIP'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedIP'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedIP'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IP'
+          description: ''
+    delete:
+      operationId: Удалить IP
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   IPv4-адрес.
+        required: true
+      tags:
+      - IP Адреса
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/mac/:
+    get:
+      operationId: Список MAC адресов
+      tags:
+      - MAC Адреса
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MAC'
+          description: ''
+    post:
+      operationId: Добавить MAC
+      tags:
+      - MAC Адреса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MAC'
+          description: ''
+  /api/v1/mac/{id}/:
+    get:
+      operationId: Получить MAC
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   MAC-адрес.
+        required: true
+      tags:
+      - MAC Адреса
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MAC'
+          description: ''
+    put:
+      operationId: Обновить MAC
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   MAC-адрес.
+        required: true
+      tags:
+      - MAC Адреса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MAC'
+          description: ''
+    patch:
+      operationId: Частично обновить MAC
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   MAC-адрес.
+        required: true
+      tags:
+      - MAC Адреса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MACWrite'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MAC'
+          description: ''
+    delete:
+      operationId: Удалить MAC
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   MAC-адрес.
+        required: true
+      tags:
+      - MAC Адреса
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/models/:
+    get:
+      operationId: Список моделей оборудования
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Модели
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedModelListList'
+          description: ''
+    post:
+      operationId: Добавить модель 
+      tags:
+      - Модели
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDetail'
+          description: ''
+  /api/v1/models/{id}/:
+    get:
+      operationId: Получить модель 
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Модель.
+        required: true
+      tags:
+      - Модели
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDetail'
+          description: ''
+    put:
+      operationId: Обновить модель
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Модель.
+        required: true
+      tags:
+      - Модели
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDetail'
+          description: ''
+    patch:
+      operationId: Частично обновить модель
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Модель.
+        required: true
+      tags:
+      - Модели
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ModelWrite'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDetail'
+          description: ''
+    delete:
+      operationId: Удалить модель
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Модель.
+        required: true
+      tags:
+      - Модели
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/responsible/:
+    get:
+      operationId: Список ответственных
+      tags:
+      - Ответственные
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Responsible'
+          description: ''
+    post:
+      operationId: Добавить ответственного
+      tags:
+      - Ответственные
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Responsible'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Responsible'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Responsible'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Responsible'
+          description: ''
+  /api/v1/responsible/{id}/:
+    get:
+      operationId: Получить ответственного
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Ответственный.
+        required: true
+      tags:
+      - Ответственные
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Responsible'
+          description: ''
+    put:
+      operationId: Обновить ответственного
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Ответственный.
+        required: true
+      tags:
+      - Ответственные
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Responsible'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Responsible'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Responsible'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Responsible'
+          description: ''
+    patch:
+      operationId: Частично обновить ответственного
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Ответственный.
+        required: true
+      tags:
+      - Ответственные
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedResponsible'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedResponsible'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedResponsible'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Responsible'
+          description: ''
+    delete:
+      operationId: Удалить ответственного
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Ответственный.
+        required: true
+      tags:
+      - Ответственные
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/users/:
+    get:
+      operationId: Список пользователей
+      tags:
+      - Пользователи
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomUser'
+          description: ''
+    post:
+      operationId: Регистрация пользователя
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreate'
+          description: ''
+  /api/v1/users/{id}/:
+    get:
+      operationId: Профиль пользователя
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Пользователь.
+        required: true
+      tags:
+      - Пользователи
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+    put:
+      operationId: Обновить пользователя
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Пользователь.
+        required: true
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomUser'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+    patch:
+      operationId: Частично обновить пользователя
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Пользователь.
+        required: true
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUser'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+    delete:
+      operationId: Удалить пользователя
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Уникальный идентификатор -   Пользователь.
+        required: true
+      tags:
+      - Пользователи
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/users/me/:
+    get:
+      operationId: Текущий пользователь
+      tags:
+      - Пользователи
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+    put:
+      operationId: Обновить текущего пользователя
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomUser'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+    patch:
+      operationId: api_v1_users_me_partial_update
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUser'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+      summary: Управление пользователями
+    delete:
+      operationId: Удалить текущего пользователя
+      tags:
+      - Пользователи
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/auth/jwt/create/:
+    post:
+      operationId: Получение токена авторизации
+      description: 'Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials.'
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/v1/auth/jwt/refresh/:
+    post:
+      operationId: Обновление токена
+      description: 'Takes a refresh type JSON web token and returns an access type
+        JSON web
+
+        token if the refresh token is valid.'
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/v1/auth/jwt/verify/:
+    post:
+      operationId: Валидность токена
+      description: 'Принимает токен и определяет его валидность.
+          Это представление не предоставляет информации о пригодности токена 
+          для конкретного использования.'
+      tags:
+      - Пользователи
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenVerify'
+          description: ''
+components:
+  schemas:
+    Activation:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - token
+      - uid
+    Attribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          example: "OS"
+          title: Название атрибута
+          maxLength: 100
+        description:
+          type: string
+          example: "Операционная система"
+          title: Описание
+          maxLength: 200
+      required:
+      - id
+      - name
+    ConsumableWrite:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        name:
+          type: string
+          example: "SP 330"
+          title: Название
+          maxLength: 200
+        cons_type:
+          type: string
+          example: "Картридж"
+          title: Тип расходника
+          maxLength: 200
+        count:
+          type: integer
+          example: 5
+          format: int64
+          title: Количество
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelList'
+      required:
+      - cons_type
+      - id
+      - name
+    ConsumableDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        name:
+          type: string
+          example: "SP 330"
+          title: Название
+          maxLength: 200
+        cons_type:
+          type: string
+          example: "Картридж"
+          title: Тип расходника
+          maxLength: 200
+        count:
+          type: integer
+          format: int64
+          title: Количество
+        models:
+          type: array
+          items:
+            type: integer
+      required:
+      - cons_type
+      - id
+      - name
+    ConsumablesList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        name:
+          type: string
+          example: "SP 330"
+          title: Название
+          maxLength: 200
+        cons_type:
+          type: string
+          example: "Картридж"
+          title: Тип расходника
+          maxLength: 200
+        count:
+          type: integer
+          format: int64
+          title: Количество
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelShort'
+          readOnly: true
+      required:
+      - cons_type
+      - id
+      - models
+      - name
+    ConsumablesShort:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          example: "SP 330"
+          title: Название
+          maxLength: 200
+        cons_type:
+          type: string
+          example: "Картридж"
+          title: Тип расходника
+          maxLength: 200
+        count:
+          type: integer
+          format: int64
+          title: Количество
+      required:
+      - cons_type
+      - id
+      - name
+    CustomUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          example: "mail@mail.ru"
+          format: email
+          title: Электронная почта
+          maxLength: 254
+        username:
+          type: string
+          example: "mark"
+          title: Имя пользователя
+          description: Обязательное поле. Не более 150 символов. Только буквы, цифры
+            и символы @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 150
+          example: "Марк"
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 150
+          example: "Обришти"
+        user_type:
+          type: string
+          readOnly: true
+      required:
+      - email
+      - first_name
+      - id
+      - last_name
+      - user_type
+      - username
+    IP:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        ip:
+          type: string
+          title: IPv4
+          example: "192.168.1.1"
+          
+      required:
+      - id
+      - ip
+    InterfaceEnum:
+      enum:
+      - ethernet
+      - wifi
+      type: string
+      description: '* `ethernet` - Ethernet
+
+        * `wifi` - Wi-Fi'
+    InventoryAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        attribute_name:
+          type: string
+          title: Название атрибута
+          readOnly: true
+        attribute_description:
+          type: string
+          title: Описание
+          readOnly: true
+        value:
+          type: string
+          title: Значение
+          maxLength: 200
+      required:
+      - attribute_description
+      - attribute_name
+      - id
+      - value
+    InventoryAttributeWrite:
+      type: object
+      properties:
+        id:
+          type: integer
+        value:
+          type: string
+      required:
+      - id
+      - value
+    InventoryDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        full_name:
+          type: string
+          title: Наименование
+          example: "SHARP SP330"
+          maxLength: 200
+        model:
+          $ref: '#/components/schemas/ModelList'
+        serial_number:
+          type: string
+          title: Серийный номер
+          example: "000123123123"
+          maxLength: 100
+        current_responsible:
+          type: string
+          readOnly: true
+        mac:
+          type: array
+          title: MAC адреса
+          example: ["00:00:00:00:00", "11:11:11:11:11"]
+          items:
+            type: string
+        ip:
+          type: array
+          title: IP адреса
+          example: ["192.168.1.1", "192.168.1.2"]
+          items:
+            type: string
+        status_real:
+          allOf:
+          - $ref: '#/components/schemas/StatusRealEnum'
+          title: Фактический статус
+        status_doc:
+          allOf:
+          - $ref: '#/components/schemas/StatusDocEnum'
+          title: Статус по документам
+        room_real:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Фактическое помещение
+          description: Номер помещения от 1 до 600
+        room_doc:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Помещение по документам
+          description: Номер помещения от 1 до 600
+        balance_price:
+          example: 1111.11
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+          title: Балансовая стоимость
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryAttribute'
+          readOnly: true
+        consumables:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumablesShort'
+          readOnly: true
+      required:
+      - current_responsible
+      - full_name
+      - id
+      - ip
+      - mac
+      - model
+      - serial_number
+    InventoryList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        full_name:
+          example: "SHARP SP330"
+          type: string
+          title: Наименование
+          maxLength: 200
+        model:
+          $ref: '#/components/schemas/ModelList'
+        serial_number:
+          example: "000123123123"
+          type: string
+          title: Серийный номер
+          maxLength: 100
+        current_responsible:
+          example: "Обришти Марк Валерьевич"
+          type: string
+          readOnly: true
+        mac:
+          type: array
+          title: MAC адреса
+          example: ["00:00:00:00:00", "11:11:11:11:11"]
+          items:
+            type: string
+        ip:
+          type: array
+          title: IP адреса
+          example: ["192.168.1.1", "192.168.1.2"]
+          items:
+            type: string
+        status_real:
+          allOf:
+          - $ref: '#/components/schemas/StatusRealEnum'
+          title: Фактический статус
+        status_doc:
+          allOf:
+          - $ref: '#/components/schemas/StatusDocEnum'
+          title: Статус по документам
+        room_real:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Фактическое помещение
+          description: Номер помещения от 1 до 600
+        room_doc:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Помещение по документам
+          description: Номер помещения от 1 до 600
+        balance_price:
+          example: 1111.11
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+          title: Балансовая стоимость
+      required:
+      - current_responsible
+      - full_name
+      - id
+      - ip
+      - mac
+      - model
+      - serial_number
+    InventoryWrite:
+      type: object
+      properties:
+        full_name:
+          example: "SHARP SP330"
+          type: string
+          title: Наименование
+          maxLength: 200
+        serial_number:
+          example: "000123123123"
+          type: string
+          title: Серийный номер
+          maxLength: 100
+        image:
+          type: string
+          format: uri
+          nullable: true
+        model:
+          type: integer
+          nullable: true
+          title: Модель оборудования
+        current_responsible:
+          type: integer
+          nullable: true
+          title: Ответственный
+        status_real:
+          allOf:
+          - $ref: '#/components/schemas/StatusRealEnum'
+          title: Фактический статус
+        status_doc:
+          allOf:
+          - $ref: '#/components/schemas/StatusDocEnum'
+          title: Статус по документам
+        room_real:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Фактическое помещение
+          description: Номер помещения от 1 до 600
+        room_doc:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Помещение по документам
+          description: Номер помещения от 1 до 600
+        balance_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+          title: Балансовая стоимость
+        mac:
+          type: array
+          items:
+            type: integer
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryAttributeWrite'
+      required:
+      - full_name
+      - serial_number
+    InventoryShort:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        full_name:
+          example: "SHARP SP330"
+          type: string
+          title: Наименование
+          maxLength: 200
+        serial_number:
+          example: "000123123123"
+          type: string
+          title: Серийный номер
+          maxLength: 100
+        room_real:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Фактическое помещение
+          description: Номер помещения от 1 до 600
+        room_doc:
+          type: integer
+          maximum: 600
+          minimum: 1
+          nullable: true
+          title: Помещение по документам
+          description: Номер помещения от 1 до 600
+    MAC:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        mac:
+          type: string
+          title: MAC-адрес
+          pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+          maxLength: 17
+          example: "00:00:00:00:00"
+        interface:
+          allOf:
+          - $ref: '#/components/schemas/InterfaceEnum'
+          title: Интерфейс
+          description: 'Тип сетевого интерфейса
+
+
+            * `ethernet` - Ethernet
+
+            * `wifi` - Wi-Fi'
+        ip_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/IP'
+        inventory:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryList'
+      required:
+      - id
+      - interface
+      - mac
+    MACWrite:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        mac:
+          type: string
+          title: MAC-адрес
+          pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+          maxLength: 17
+          example: "00:00:00:00:00"
+        interface:
+          allOf:
+          - $ref: '#/components/schemas/InterfaceEnum'
+          title: Интерфейс
+          description: 'Тип сетевого интерфейса
+
+
+            * `ethernet` - Ethernet
+
+            * `wifi` - Wi-Fi'
+        ip_addresses:
+          type: array
+          items:
+            type: integer
+        inventory:
+          type: integer
+      required:
+      - id
+      - interface
+      - mac
+    ModelWrite:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        name:
+          type: string
+          example: "SHARP SP330"
+          title: Наименование
+          maxLength: 200
+        model_type:
+          allOf:
+          - $ref: '#/components/schemas/ModelTypeEnum'
+          title: Тип оборудования
+        consumables:
+          type: array
+          items:
+            type: integer
+        inventory:
+          type: array
+          items:
+            type: integer
+      required:
+      - id
+      - name
+    ModelDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        name:
+          type: string
+          example: "SHARP SP330"
+          title: Наименование
+          maxLength: 200
+        model_type:
+          allOf:
+          - $ref: '#/components/schemas/ModelTypeEnum'
+          title: Тип оборудования
+        consumables:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumablesShort'
+        inventory:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryShort'
+      required:
+      - id
+      - name
+    ModelList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Изображение
+        name:
+          type: string
+          example: "SHARP SP330"
+          title: Наименование
+          maxLength: 200
+        model_type:
+          allOf:
+          - $ref: '#/components/schemas/ModelTypeEnum'
+          title: Тип оборудования
+        count:
+          type: integer
+          readOnly: true
+      required:
+      - id
+      - name
+    ModelShort:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          example: "SHARP SP330"
+          title: Наименование
+          maxLength: 200
+      required:
+      - id
+      - name
+    ModelTypeEnum:
+      enum:
+      - computer
+      - printer
+      - undefined
+      type: string
+      example: printer
+      description: '* `computer` - Компьютер
+
+        * `printer` - Принтер
+
+        * `undefined` - Не определено'
+    PaginatedConsumablesListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumablesList'
+    PaginatedInventoryListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryList'
+    PaginatedModelListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelList'
+    PasswordResetConfirm:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+        new_password:
+          type: string
+      required:
+      - new_password
+      - token
+      - uid
+    PatchedAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Название атрибута
+          maxLength: 100
+        description:
+          type: string
+          title: Описание
+          maxLength: 200
+    PatchedConsumableDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        name:
+          type: string
+          title: Название
+          maxLength: 200
+        cons_type:
+          type: string
+          title: Тип расходника
+          maxLength: 200
+        count:
+          type: integer
+          format: int64
+          title: Количество
+        models:
+          type: array
+          items:
+            type: integer
+    PatchedCustomUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          title: Электронная почта
+          example: "mail@mail.ru"
+          maxLength: 254
+        username:
+          type: string
+          example: "mark"
+          title: Имя пользователя
+          description: Обязательное поле. Не более 150 символов. Только буквы, цифры
+            и символы @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          title: Имя
+          example: "Марк"
+          maxLength: 150
+        last_name:
+          type: string
+          title: Фамилия
+          example: "Обришти"
+          maxLength: 150
+        user_type:
+          type: string
+          readOnly: true
+    PatchedIP:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        ip:
+          type: string
+          title: IPv4
+    PatchedResponsible:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        surname:
+          type: string
+          title: Фамилия
+          maxLength: 200
+        name:
+          type: string
+          title: Имя
+          maxLength: 200
+        patronymic:
+          type: string
+          title: Отчество
+          maxLength: 200
+        get_full_name:
+          type: string
+          readOnly: true
+    Responsible:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        surname:
+          type: string
+          example: "Обришти"
+          title: Фамилия
+          maxLength: 200
+        name:
+          type: string
+          example: "Марк"
+          title: Имя
+          maxLength: 200
+        patronymic:
+          type: string
+          example: "Валерьевич"
+          title: Отчество
+          maxLength: 200
+        get_full_name:
+          example: "Обришти Марк Валерьевич"
+          type: string
+          readOnly: true
+      required:
+      - name
+      - patronymic
+      - surname
+    SendEmailReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    SetPassword:
+      type: object
+      properties:
+        new_password:
+          type: string
+        current_password:
+          type: string
+      required:
+      - current_password
+      - new_password
+    SetUsername:
+      type: object
+      properties:
+        current_password:
+          type: string
+        new_username:
+          type: string
+          title: Имя пользователя
+          description: Обязательное поле. Не более 150 символов. Только буквы, цифры
+            и символы @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - current_password
+      - new_username
+    StatusDocEnum:
+      enum:
+      - active
+      - to_written_off
+      - written_off
+      type: string
+      description: '* `active` - Действующий
+
+        * `to_written_off` - К списанию
+
+        * `written_off` - Списан'
+    StatusRealEnum:
+      enum:
+      - active
+      - to_written_off
+      - written_off
+      type: string
+      description: '* `active` - Действующий
+
+        * `to_written_off` - К списанию
+
+        * `written_off` - Списан'
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          writeOnly: true
+      required:
+      - token
+    UserCreate:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Электронная почта
+          maxLength: 254
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 150
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 150
+        username:
+          type: string
+          title: Имя пользователя
+          description: Обязательное поле. Не более 150 символов. Только буквы, цифры
+            и символы @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - first_name
+      - id
+      - last_name
+      - password
+      - username
+    UsernameResetConfirm:
+      type: object
+      properties:
+        new_username:
+          type: string
+          title: Имя пользователя
+          description: Обязательное поле. Не более 150 символов. Только буквы, цифры
+            и символы @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - new_username
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

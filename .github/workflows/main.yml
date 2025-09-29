@@ -44,7 +44,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        source: "docker-compose.yml, nginx/nginx.conf"
+        source: "docker-compose.yml, nginx/nginx.conf, docs/schema.yml, docs/redoc.html"
         target: "inventory"
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
